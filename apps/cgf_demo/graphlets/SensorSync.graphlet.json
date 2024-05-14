@@ -1,0 +1,183 @@
+{
+    "name": "SensorSync",
+    "inputPorts": {
+        "SENSOR_TIMESTAMP": {
+            "type": "dwTime_t",
+            "array": 11
+        }
+    },
+    "outputPorts": {
+        "SYNC_TIMESTAMP": {
+            "type": "dwTime_t",
+            "array": 11
+        }
+    },
+    "parameters": {
+        "minTimestep": {
+            "type": "dwTime_t",
+            "default": 0
+        },
+        "epochId": {
+            "type": "uint32_t",
+            "default": 0
+        },
+        "syncServerHostIP": {
+            "type": "std::string",
+            "default": "127.0.0.1"
+        },
+        "syncServerHostPort": {
+            "type": "uint16_t",
+            "default": 40001
+        },
+        "logTimestampDiff": {
+            "type": "bool",
+            "default": false
+        },
+        "logTimestampDiffInterval": {
+            "type": "uint32_t",
+            "default": 0
+        }
+    },
+    "subcomponents": {
+        "sensorSyncNode": {
+            "componentType": "../nodes/SensorSyncNode.node.json",
+            "parameters": {
+                "*": "$*"
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": "SENSOR_TIMESTAMP[0]",
+            "dests": {
+                "sensorSyncNode.SENSOR_TIMESTAMP[0]": {}
+            }
+        },
+        {
+            "src": "SENSOR_TIMESTAMP[1]",
+            "dests": {
+                "sensorSyncNode.SENSOR_TIMESTAMP[1]": {}
+            }
+        },
+        {
+            "src": "SENSOR_TIMESTAMP[2]",
+            "dests": {
+                "sensorSyncNode.SENSOR_TIMESTAMP[2]": {}
+            }
+        },
+        {
+            "src": "SENSOR_TIMESTAMP[3]",
+            "dests": {
+                "sensorSyncNode.SENSOR_TIMESTAMP[3]": {}
+            }
+        },
+        {
+            "src": "SENSOR_TIMESTAMP[4]",
+            "dests": {
+                "sensorSyncNode.SENSOR_TIMESTAMP[4]": {}
+            }
+        },
+        {
+            "src": "SENSOR_TIMESTAMP[5]",
+            "dests": {
+                "sensorSyncNode.SENSOR_TIMESTAMP[5]": {}
+            }
+        },
+        {
+            "src": "SENSOR_TIMESTAMP[6]",
+            "dests": {
+                "sensorSyncNode.SENSOR_TIMESTAMP[6]": {}
+            }
+        },
+        {
+            "src": "SENSOR_TIMESTAMP[7]",
+            "dests": {
+                "sensorSyncNode.SENSOR_TIMESTAMP[7]": {}
+            }
+        },
+        {
+            "src": "SENSOR_TIMESTAMP[8]",
+            "dests": {
+                "sensorSyncNode.SENSOR_TIMESTAMP[8]": {}
+            }
+        },
+        {
+            "src": "SENSOR_TIMESTAMP[9]",
+            "dests": {
+                "sensorSyncNode.SENSOR_TIMESTAMP[9]": {}
+            }
+        },
+        {
+            "src": "SENSOR_TIMESTAMP[10]",
+            "dests": {
+                "sensorSyncNode.SENSOR_TIMESTAMP[10]": {}
+            }
+        },
+        {
+            "src": "sensorSyncNode.SYNC_TIMESTAMP[0]",
+            "dests": {
+                "SYNC_TIMESTAMP[0]": {}
+            }
+        },
+        {
+            "src": "sensorSyncNode.SYNC_TIMESTAMP[1]",
+            "dests": {
+                "SYNC_TIMESTAMP[1]": {}
+            }
+        },
+        {
+            "src": "sensorSyncNode.SYNC_TIMESTAMP[2]",
+            "dests": {
+                "SYNC_TIMESTAMP[2]": {}
+            }
+        },
+        {
+            "src": "sensorSyncNode.SYNC_TIMESTAMP[3]",
+            "dests": {
+                "SYNC_TIMESTAMP[3]": {}
+            }
+        },
+        {
+            "src": "sensorSyncNode.SYNC_TIMESTAMP[4]",
+            "dests": {
+                "SYNC_TIMESTAMP[4]": {}
+            }
+        },
+        {
+            "src": "sensorSyncNode.SYNC_TIMESTAMP[5]",
+            "dests": {
+                "SYNC_TIMESTAMP[5]": {}
+            }
+        },
+        {
+            "src": "sensorSyncNode.SYNC_TIMESTAMP[6]",
+            "dests": {
+                "SYNC_TIMESTAMP[6]": {}
+            }
+        },
+        {
+            "src": "sensorSyncNode.SYNC_TIMESTAMP[7]",
+            "dests": {
+                "SYNC_TIMESTAMP[7]": {}
+            }
+        },
+        {
+            "src": "sensorSyncNode.SYNC_TIMESTAMP[8]",
+            "dests": {
+                "SYNC_TIMESTAMP[8]": {}
+            }
+        },
+        {
+            "src": "sensorSyncNode.SYNC_TIMESTAMP[9]",
+            "dests": {
+                "SYNC_TIMESTAMP[9]": {}
+            }
+        },
+        {
+            "src": "sensorSyncNode.SYNC_TIMESTAMP[10]",
+            "dests": {
+                "SYNC_TIMESTAMP[10]": {}
+            }
+        }
+    ]
+}

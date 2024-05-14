@@ -1,0 +1,428 @@
+{
+    "name": "RenderDemo",
+    "inputPorts": {
+        "IMAGE": {
+            "type": "dwImageHandle_t",
+            "array": 9
+        },
+        "FEATURE": {
+            "type": "dwFeatureHistoryArray",
+            "array": 9
+        },
+        "CAMERA_EXTRINSICS": {
+            "type": "dwCalibratedExtrinsics",
+            "array": 9
+        },
+        "IMU_EXTRINSICS": {
+            "type": "dwCalibratedExtrinsics"
+        },
+        "RADAR_EXTRINSICS": {
+            "type": "dwCalibratedExtrinsics",
+            "array": 8
+        },
+        "LIDAR_EXTRINSICS": {
+            "type": "dwCalibratedExtrinsics",
+            "array": 8
+        },
+        "LIDAR_POINT_CLOUD": {
+            "type": "dwPointCloud",
+            "array": 8
+        },
+        "WHEEL_RADII": {
+            "type": "dwCalibratedWheelRadii"
+        },
+        "FRONT_STEERING_OFFSET": {
+            "type": "dwCalibratedSteeringProperties"
+        },
+        "RADAR_PROCESSED_DATA": {
+            "type": "dwRadarScan"
+        },
+        "RADAR_POINT_CLOUD": {
+            "type": "dwPointCloud"
+        },
+        "EGOMOTION_STATE": {
+            "type": "dwEgomotionStateHandle_t"
+        },
+        "VEHICLE_IO_STATE": {
+            "type": "dwVehicleIOState"
+        },
+        "VEHICLE_IO_COMMAND": {
+            "type": "dwVehicleIOCommand"
+        }
+    },
+    "outputPorts": {},
+    "parameters": {
+        "streamIndex": {
+            "type": "size_t",
+            "default": 1
+        },
+        "masterCameraIndex": {
+            "type": "size_t",
+            "default": 1
+        }
+    },
+    "subcomponents": {
+        "renderingNode": {
+            "componentType": "../nodes/RenderingCGFDemoNode.node.json",
+            "parameters": {
+                "*": "$*"
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": "CAMERA_EXTRINSICS[0]",
+            "dests": {
+                "renderingNode.CAMERA_EXTRINSICS[0]": {}
+            }
+        },
+        {
+            "src": "CAMERA_EXTRINSICS[1]",
+            "dests": {
+                "renderingNode.CAMERA_EXTRINSICS[1]": {}
+            }
+        },
+        {
+            "src": "CAMERA_EXTRINSICS[2]",
+            "dests": {
+                "renderingNode.CAMERA_EXTRINSICS[2]": {}
+            }
+        },
+        {
+            "src": "CAMERA_EXTRINSICS[3]",
+            "dests": {
+                "renderingNode.CAMERA_EXTRINSICS[3]": {}
+            }
+        },
+        {
+            "src": "CAMERA_EXTRINSICS[4]",
+            "dests": {
+                "renderingNode.CAMERA_EXTRINSICS[4]": {}
+            }
+        },
+        {
+            "src": "CAMERA_EXTRINSICS[5]",
+            "dests": {
+                "renderingNode.CAMERA_EXTRINSICS[5]": {}
+            }
+        },
+        {
+            "src": "CAMERA_EXTRINSICS[6]",
+            "dests": {
+                "renderingNode.CAMERA_EXTRINSICS[6]": {}
+            }
+        },
+        {
+            "src": "CAMERA_EXTRINSICS[7]",
+            "dests": {
+                "renderingNode.CAMERA_EXTRINSICS[7]": {}
+            }
+        },
+        {
+            "src": "CAMERA_EXTRINSICS[8]",
+            "dests": {
+                "renderingNode.CAMERA_EXTRINSICS[8]": {}
+            }
+        },
+        {
+            "src": "EGOMOTION_STATE",
+            "dests": {
+                "renderingNode.EGOMOTION_STATE": {}
+            }
+        },
+        {
+            "src": "FEATURE[0]",
+            "dests": {
+                "renderingNode.FEATURE[0]": {}
+            }
+        },
+        {
+            "src": "FEATURE[1]",
+            "dests": {
+                "renderingNode.FEATURE[1]": {}
+            }
+        },
+        {
+            "src": "FEATURE[2]",
+            "dests": {
+                "renderingNode.FEATURE[2]": {}
+            }
+        },
+        {
+            "src": "FEATURE[3]",
+            "dests": {
+                "renderingNode.FEATURE[3]": {}
+            }
+        },
+        {
+            "src": "FEATURE[4]",
+            "dests": {
+                "renderingNode.FEATURE[4]": {}
+            }
+        },
+        {
+            "src": "FEATURE[5]",
+            "dests": {
+                "renderingNode.FEATURE[5]": {}
+            }
+        },
+        {
+            "src": "FEATURE[6]",
+            "dests": {
+                "renderingNode.FEATURE[6]": {}
+            }
+        },
+        {
+            "src": "FEATURE[7]",
+            "dests": {
+                "renderingNode.FEATURE[7]": {}
+            }
+        },
+        {
+            "src": "FEATURE[8]",
+            "dests": {
+                "renderingNode.FEATURE[8]": {}
+            }
+        },
+        {
+            "src": "FRONT_STEERING_OFFSET",
+            "dests": {
+                "renderingNode.FRONT_STEERING_OFFSET": {}
+            }
+        },
+        {
+            "src": "IMAGE[0]",
+            "dests": {
+                "renderingNode.IMAGE[0]": {}
+            }
+        },
+        {
+            "src": "IMAGE[1]",
+            "dests": {
+                "renderingNode.IMAGE[1]": {}
+            }
+        },
+        {
+            "src": "IMAGE[2]",
+            "dests": {
+                "renderingNode.IMAGE[2]": {}
+            }
+        },
+        {
+            "src": "IMAGE[3]",
+            "dests": {
+                "renderingNode.IMAGE[3]": {}
+            }
+        },
+        {
+            "src": "IMAGE[4]",
+            "dests": {
+                "renderingNode.IMAGE[4]": {}
+            }
+        },
+        {
+            "src": "IMAGE[5]",
+            "dests": {
+                "renderingNode.IMAGE[5]": {}
+            }
+        },
+        {
+            "src": "IMAGE[6]",
+            "dests": {
+                "renderingNode.IMAGE[6]": {}
+            }
+        },
+        {
+            "src": "IMAGE[7]",
+            "dests": {
+                "renderingNode.IMAGE[7]": {}
+            }
+        },
+        {
+            "src": "IMAGE[8]",
+            "dests": {
+                "renderingNode.IMAGE[8]": {}
+            }
+        },
+        {
+            "src": "IMU_EXTRINSICS",
+            "dests": {
+                "renderingNode.IMU_EXTRINSICS": {}
+            }
+        },
+        {
+            "src": "LIDAR_EXTRINSICS[0]",
+            "dests": {
+                "renderingNode.LIDAR_EXTRINSICS[0]": {}
+            }
+        },
+        {
+            "src": "LIDAR_EXTRINSICS[1]",
+            "dests": {
+                "renderingNode.LIDAR_EXTRINSICS[1]": {}
+            }
+        },
+        {
+            "src": "LIDAR_EXTRINSICS[2]",
+            "dests": {
+                "renderingNode.LIDAR_EXTRINSICS[2]": {}
+            }
+        },
+        {
+            "src": "LIDAR_EXTRINSICS[3]",
+            "dests": {
+                "renderingNode.LIDAR_EXTRINSICS[3]": {}
+            }
+        },
+        {
+            "src": "LIDAR_EXTRINSICS[4]",
+            "dests": {
+                "renderingNode.LIDAR_EXTRINSICS[4]": {}
+            }
+        },
+        {
+            "src": "LIDAR_EXTRINSICS[5]",
+            "dests": {
+                "renderingNode.LIDAR_EXTRINSICS[5]": {}
+            }
+        },
+        {
+            "src": "LIDAR_EXTRINSICS[6]",
+            "dests": {
+                "renderingNode.LIDAR_EXTRINSICS[6]": {}
+            }
+        },
+        {
+            "src": "LIDAR_EXTRINSICS[7]",
+            "dests": {
+                "renderingNode.LIDAR_EXTRINSICS[7]": {}
+            }
+        },
+        {
+            "src": "LIDAR_POINT_CLOUD[0]",
+            "dests": {
+                "renderingNode.LIDAR_POINT_CLOUD[0]": {}
+            }
+        },
+        {
+            "src": "LIDAR_POINT_CLOUD[1]",
+            "dests": {
+                "renderingNode.LIDAR_POINT_CLOUD[1]": {}
+            }
+        },
+        {
+            "src": "LIDAR_POINT_CLOUD[2]",
+            "dests": {
+                "renderingNode.LIDAR_POINT_CLOUD[2]": {}
+            }
+        },
+        {
+            "src": "LIDAR_POINT_CLOUD[3]",
+            "dests": {
+                "renderingNode.LIDAR_POINT_CLOUD[3]": {}
+            }
+        },
+        {
+            "src": "LIDAR_POINT_CLOUD[4]",
+            "dests": {
+                "renderingNode.LIDAR_POINT_CLOUD[4]": {}
+            }
+        },
+        {
+            "src": "LIDAR_POINT_CLOUD[5]",
+            "dests": {
+                "renderingNode.LIDAR_POINT_CLOUD[5]": {}
+            }
+        },
+        {
+            "src": "LIDAR_POINT_CLOUD[6]",
+            "dests": {
+                "renderingNode.LIDAR_POINT_CLOUD[6]": {}
+            }
+        },
+        {
+            "src": "LIDAR_POINT_CLOUD[7]",
+            "dests": {
+                "renderingNode.LIDAR_POINT_CLOUD[7]": {}
+            }
+        },
+        {
+            "src": "RADAR_EXTRINSICS[0]",
+            "dests": {
+                "renderingNode.RADAR_EXTRINSICS[0]": {}
+            }
+        },
+        {
+            "src": "RADAR_EXTRINSICS[1]",
+            "dests": {
+                "renderingNode.RADAR_EXTRINSICS[1]": {}
+            }
+        },
+        {
+            "src": "RADAR_EXTRINSICS[2]",
+            "dests": {
+                "renderingNode.RADAR_EXTRINSICS[2]": {}
+            }
+        },
+        {
+            "src": "RADAR_EXTRINSICS[3]",
+            "dests": {
+                "renderingNode.RADAR_EXTRINSICS[3]": {}
+            }
+        },
+        {
+            "src": "RADAR_EXTRINSICS[4]",
+            "dests": {
+                "renderingNode.RADAR_EXTRINSICS[4]": {}
+            }
+        },
+        {
+            "src": "RADAR_EXTRINSICS[5]",
+            "dests": {
+                "renderingNode.RADAR_EXTRINSICS[5]": {}
+            }
+        },
+        {
+            "src": "RADAR_EXTRINSICS[6]",
+            "dests": {
+                "renderingNode.RADAR_EXTRINSICS[6]": {}
+            }
+        },
+        {
+            "src": "RADAR_EXTRINSICS[7]",
+            "dests": {
+                "renderingNode.RADAR_EXTRINSICS[7]": {}
+            }
+        },
+        {
+            "src": "RADAR_POINT_CLOUD",
+            "dests": {
+                "renderingNode.RADAR_POINT_CLOUD": {}
+            }
+        },
+        {
+            "src": "RADAR_PROCESSED_DATA",
+            "dests": {
+                "renderingNode.RADAR_PROCESSED_DATA": {}
+            }
+        },
+        {
+            "src": "VEHICLE_IO_COMMAND",
+            "dests": {
+                "renderingNode.VEHICLE_IO_COMMAND": {}
+            }
+        },
+        {
+            "src": "VEHICLE_IO_STATE",
+            "dests": {
+                "renderingNode.VEHICLE_IO_STATE": {}
+            }
+        },
+        {
+            "src": "WHEEL_RADII",
+            "dests": {
+                "renderingNode.WHEEL_RADII": {}
+            }
+        }
+    ]
+}

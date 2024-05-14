@@ -1,0 +1,1483 @@
+{
+    "name": "SelfCalibrationDemo",
+    "inputPorts": {
+        "EGOMOTION_STATE_ODO_IMU": {
+            "type": "dwEgomotionStateHandle_t"
+        },
+        "IMU_FRAME": {
+            "type": "dwIMUFrame"
+        },
+        "VEHICLE_IO_NON_SAFETY_STATE": {
+            "type": "dwVehicleIONonSafetyState"
+        },
+        "VEHICLE_IO_ACTUATION_FEEDBACK": {
+            "type": "dwVehicleIOActuationFeedback"
+        },
+        "CAMERA_FEATURE_DETECTION": {
+            "type": "dwFeatureHistoryArray",
+            "array": 13
+        },
+        "CAMERA_TIMESTAMP": {
+            "type": "dwTime_t",
+            "array": 13
+        },
+        "CAMERA_INTRINSICS": {
+            "type": "dwCameraIntrinsics",
+            "array": 13
+        },
+        "RADAR_DOPPLER_MOTION": {
+            "type": "dwRadarDopplerMotion",
+            "array": 9
+        },
+        "RADAR_SCAN": {
+            "type": "dwRadarScan",
+            "array": 9
+        },
+        "LIDAR_POINT_CLOUD_RAW": {
+            "type": "dwLidarPointCloud",
+            "array": 8
+        },
+        "LIDAR_POSE": {
+            "type": "dwLidarPose",
+            "array": 8
+        }
+    },
+    "outputPorts": {
+        "IMU_EXTRINSICS": {
+            "type": "dwCalibratedExtrinsics"
+        },
+        "CAMERA_EXTRINSICS": {
+            "type": "dwCalibratedExtrinsics",
+            "array": 13
+        },
+        "RADAR_EXTRINSICS": {
+            "type": "dwCalibratedExtrinsics",
+            "array": 9
+        },
+        "RADAR_INTRINSICS": {
+            "type": "dwCalibratedRadarIntrinsics",
+            "array": 9
+        },
+        "LIDAR_EXTRINSICS": {
+            "type": "dwCalibratedExtrinsics",
+            "array": 8
+        },
+        "WHEEL_RADII": {
+            "type": "dwCalibratedWheelRadii"
+        },
+        "FRONT_STEERING_OFFSET": {
+            "type": "dwCalibratedSteeringProperties"
+        },
+        "ROADCAST_DATA": {
+            "type": "dwRoadCastNodeCalibrationDataArray"
+        },
+        "ROADCAST_WHEEL_RADII_DATA": {
+            "type": "dwRoadCastNodeCalibrationWheelRadiiData"
+        },
+        "ROADCAST_IMU_INTRINSICS": {
+            "type": "dwRoadCastNodeCalibrationIMUIntrinsicsArray"
+        }
+    },
+    "parameters": {
+        "enforceDependencies": {
+            "type": "bool",
+            "default": false
+        },
+        "calibrateVehicle": {
+            "type": "bool",
+            "default": true
+        },
+        "calibrateIMU": {
+            "type": "bool",
+            "default": true
+        },
+        "cameraEnabledMask": {
+            "type": "bool",
+            "array": 13,
+            "default": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ]
+        },
+        "cameraCalibrationSignals": {
+            "type": "uint32_t",
+            "array": 13,
+            "default": [
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3
+            ]
+        },
+        "cameraCalibrationMethod": {
+            "type": "uint32_t",
+            "array": 13,
+            "default": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        "cameraSensorIndices": {
+            "type": "size_t",
+            "array": 13,
+            "default": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12
+            ]
+        },
+        "cameraSensorStreamIndices": {
+            "type": "size_t",
+            "array": 13,
+            "default": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        "radarEnabledMask": {
+            "type": "bool",
+            "array": 9,
+            "default": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+            ]
+        },
+        "radarSensorIndices": {
+            "type": "size_t",
+            "array": 9,
+            "default": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+            ]
+        },
+        "radarSensorStreamIndices": {
+            "type": "size_t",
+            "array": 9,
+            "default": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        "radarSensorWheelCalibration": {
+            "type": "int32_t",
+            "default": 0
+        },
+        "lidarEnabledMask": {
+            "type": "bool",
+            "array": 8,
+            "default": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ]
+        },
+        "lidarSensorIndices": {
+            "type": "size_t",
+            "array": 8,
+            "default": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        "lidarSensorStreamIndices": {
+            "type": "size_t",
+            "array": 8,
+            "default": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+            ]
+        },
+        "channelFifoSize": {
+            "type": "uint32_t",
+            "default": 100
+        }
+    },
+    "subcomponents": {
+        "roadCastAggregatorNode": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationroadcastaggregatornode/dwSelfCalibrationRoadcastAggregatorNode.node.json",
+            "parameters": {
+                "cameraSensorIndices": "$cameraSensorIndices",
+                "lidarSensorIndices": "$lidarSensorIndices",
+                "radarSensorIndices": "$radarSensorIndices"
+            }
+        },
+        "selfCalibrationCameraNode0": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationcameranode/dwSelfCalibrationCameraNode.node.json",
+            "parameters": {
+                "cameraCalibrationMethod": "$cameraCalibrationMethod[0]",
+                "cameraCalibrationSignals": "$cameraCalibrationSignals[0]",
+                "cameraSensorStreamIndex": "$cameraSensorStreamIndices[0]",
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$cameraEnabledMask[0]",
+                "rotationHistogramRangeDeg": 5,
+                "sensorIndex": "$cameraSensorIndices[0]"
+            }
+        },
+        "selfCalibrationCameraNode1": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationcameranode/dwSelfCalibrationCameraNode.node.json",
+            "parameters": {
+                "cameraCalibrationMethod": "$cameraCalibrationMethod[1]",
+                "cameraCalibrationSignals": "$cameraCalibrationSignals[1]",
+                "cameraSensorStreamIndex": "$cameraSensorStreamIndices[1]",
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$cameraEnabledMask[1]",
+                "rotationHistogramRangeDeg": 5,
+                "sensorIndex": "$cameraSensorIndices[1]"
+            }
+        },
+        "selfCalibrationCameraNode10": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationcameranode/dwSelfCalibrationCameraNode.node.json",
+            "parameters": {
+                "cameraCalibrationMethod": "$cameraCalibrationMethod[10]",
+                "cameraCalibrationSignals": "$cameraCalibrationSignals[10]",
+                "cameraSensorStreamIndex": "$cameraSensorStreamIndices[10]",
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$cameraEnabledMask[10]",
+                "rotationHistogramRangeDeg": 5,
+                "sensorIndex": "$cameraSensorIndices[10]"
+            }
+        },
+        "selfCalibrationCameraNode11": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationcameranode/dwSelfCalibrationCameraNode.node.json",
+            "parameters": {
+                "cameraCalibrationMethod": "$cameraCalibrationMethod[11]",
+                "cameraCalibrationSignals": "$cameraCalibrationSignals[11]",
+                "cameraSensorStreamIndex": "$cameraSensorStreamIndices[11]",
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$cameraEnabledMask[11]",
+                "rotationHistogramRangeDeg": 5,
+                "sensorIndex": "$cameraSensorIndices[11]"
+            }
+        },
+        "selfCalibrationCameraNode12": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationcameranode/dwSelfCalibrationCameraNode.node.json",
+            "parameters": {
+                "cameraCalibrationMethod": "$cameraCalibrationMethod[12]",
+                "cameraCalibrationSignals": "$cameraCalibrationSignals[12]",
+                "cameraSensorStreamIndex": "$cameraSensorStreamIndices[12]",
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$cameraEnabledMask[12]",
+                "rotationHistogramRangeDeg": 5,
+                "sensorIndex": "$cameraSensorIndices[12]"
+            }
+        },
+        "selfCalibrationCameraNode2": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationcameranode/dwSelfCalibrationCameraNode.node.json",
+            "parameters": {
+                "cameraCalibrationMethod": "$cameraCalibrationMethod[2]",
+                "cameraCalibrationSignals": "$cameraCalibrationSignals[2]",
+                "cameraSensorStreamIndex": "$cameraSensorStreamIndices[2]",
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$cameraEnabledMask[2]",
+                "rotationHistogramRangeDeg": 5,
+                "sensorIndex": "$cameraSensorIndices[2]"
+            }
+        },
+        "selfCalibrationCameraNode3": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationcameranode/dwSelfCalibrationCameraNode.node.json",
+            "parameters": {
+                "cameraCalibrationMethod": "$cameraCalibrationMethod[3]",
+                "cameraCalibrationSignals": "$cameraCalibrationSignals[3]",
+                "cameraSensorStreamIndex": "$cameraSensorStreamIndices[3]",
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$cameraEnabledMask[3]",
+                "rotationHistogramRangeDeg": 5,
+                "sensorIndex": "$cameraSensorIndices[3]"
+            }
+        },
+        "selfCalibrationCameraNode4": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationcameranode/dwSelfCalibrationCameraNode.node.json",
+            "parameters": {
+                "cameraCalibrationMethod": "$cameraCalibrationMethod[4]",
+                "cameraCalibrationSignals": "$cameraCalibrationSignals[4]",
+                "cameraSensorStreamIndex": "$cameraSensorStreamIndices[4]",
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$cameraEnabledMask[4]",
+                "rotationHistogramRangeDeg": 5,
+                "sensorIndex": "$cameraSensorIndices[4]"
+            }
+        },
+        "selfCalibrationCameraNode5": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationcameranode/dwSelfCalibrationCameraNode.node.json",
+            "parameters": {
+                "cameraCalibrationMethod": "$cameraCalibrationMethod[5]",
+                "cameraCalibrationSignals": "$cameraCalibrationSignals[5]",
+                "cameraSensorStreamIndex": "$cameraSensorStreamIndices[5]",
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$cameraEnabledMask[5]",
+                "rotationHistogramRangeDeg": 5,
+                "sensorIndex": "$cameraSensorIndices[5]"
+            }
+        },
+        "selfCalibrationCameraNode6": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationcameranode/dwSelfCalibrationCameraNode.node.json",
+            "parameters": {
+                "cameraCalibrationMethod": "$cameraCalibrationMethod[6]",
+                "cameraCalibrationSignals": "$cameraCalibrationSignals[6]",
+                "cameraSensorStreamIndex": "$cameraSensorStreamIndices[6]",
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$cameraEnabledMask[6]",
+                "rotationHistogramRangeDeg": 5,
+                "sensorIndex": "$cameraSensorIndices[6]"
+            }
+        },
+        "selfCalibrationCameraNode7": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationcameranode/dwSelfCalibrationCameraNode.node.json",
+            "parameters": {
+                "cameraCalibrationMethod": "$cameraCalibrationMethod[7]",
+                "cameraCalibrationSignals": "$cameraCalibrationSignals[7]",
+                "cameraSensorStreamIndex": "$cameraSensorStreamIndices[7]",
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$cameraEnabledMask[7]",
+                "rotationHistogramRangeDeg": 5,
+                "sensorIndex": "$cameraSensorIndices[7]"
+            }
+        },
+        "selfCalibrationCameraNode8": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationcameranode/dwSelfCalibrationCameraNode.node.json",
+            "parameters": {
+                "cameraCalibrationMethod": "$cameraCalibrationMethod[8]",
+                "cameraCalibrationSignals": "$cameraCalibrationSignals[8]",
+                "cameraSensorStreamIndex": "$cameraSensorStreamIndices[8]",
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$cameraEnabledMask[8]",
+                "rotationHistogramRangeDeg": 5,
+                "sensorIndex": "$cameraSensorIndices[8]"
+            }
+        },
+        "selfCalibrationCameraNode9": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationcameranode/dwSelfCalibrationCameraNode.node.json",
+            "parameters": {
+                "cameraCalibrationMethod": "$cameraCalibrationMethod[9]",
+                "cameraCalibrationSignals": "$cameraCalibrationSignals[9]",
+                "cameraSensorStreamIndex": "$cameraSensorStreamIndices[9]",
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$cameraEnabledMask[9]",
+                "rotationHistogramRangeDeg": 5,
+                "sensorIndex": "$cameraSensorIndices[9]"
+            }
+        },
+        "selfCalibrationIMUNode0": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationimunode/dwSelfCalibrationIMUNode.node.json",
+            "parameters": {
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$calibrateIMU",
+                "histogramMaxOutlierFailureCount": 5000,
+                "sensorIndex": 0
+            }
+        },
+        "selfCalibrationLidarNode0": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationlidarnode/dwSelfCalibrationLidarNode.node.json",
+            "parameters": {
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$lidarEnabledMask[0]",
+                "lidarSensorStreamIndex": "$lidarSensorStreamIndices[0]",
+                "sensorIndex": "$lidarSensorIndices[0]"
+            }
+        },
+        "selfCalibrationLidarNode1": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationlidarnode/dwSelfCalibrationLidarNode.node.json",
+            "parameters": {
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$lidarEnabledMask[1]",
+                "lidarSensorStreamIndex": "$lidarSensorStreamIndices[1]",
+                "sensorIndex": "$lidarSensorIndices[1]"
+            }
+        },
+        "selfCalibrationLidarNode2": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationlidarnode/dwSelfCalibrationLidarNode.node.json",
+            "parameters": {
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$lidarEnabledMask[2]",
+                "lidarSensorStreamIndex": "$lidarSensorStreamIndices[2]",
+                "sensorIndex": "$lidarSensorIndices[2]"
+            }
+        },
+        "selfCalibrationLidarNode3": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationlidarnode/dwSelfCalibrationLidarNode.node.json",
+            "parameters": {
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$lidarEnabledMask[3]",
+                "lidarSensorStreamIndex": "$lidarSensorStreamIndices[3]",
+                "sensorIndex": "$lidarSensorIndices[3]"
+            }
+        },
+        "selfCalibrationLidarNode4": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationlidarnode/dwSelfCalibrationLidarNode.node.json",
+            "parameters": {
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$lidarEnabledMask[4]",
+                "lidarSensorStreamIndex": "$lidarSensorStreamIndices[4]",
+                "sensorIndex": "$lidarSensorIndices[4]"
+            }
+        },
+        "selfCalibrationLidarNode5": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationlidarnode/dwSelfCalibrationLidarNode.node.json",
+            "parameters": {
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$lidarEnabledMask[5]",
+                "lidarSensorStreamIndex": "$lidarSensorStreamIndices[5]",
+                "sensorIndex": "$lidarSensorIndices[5]"
+            }
+        },
+        "selfCalibrationLidarNode6": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationlidarnode/dwSelfCalibrationLidarNode.node.json",
+            "parameters": {
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$lidarEnabledMask[6]",
+                "lidarSensorStreamIndex": "$lidarSensorStreamIndices[6]",
+                "sensorIndex": "$lidarSensorIndices[6]"
+            }
+        },
+        "selfCalibrationLidarNode7": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationlidarnode/dwSelfCalibrationLidarNode.node.json",
+            "parameters": {
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$lidarEnabledMask[7]",
+                "lidarSensorStreamIndex": "$lidarSensorStreamIndices[7]",
+                "sensorIndex": "$lidarSensorIndices[7]"
+            }
+        },
+        "selfCalibrationRadarIntrinsicsNode0": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationradarintrinsicsnode/dwSelfCalibrationRadarIntrinsicsNode.node.json",
+            "parameters": {
+                "enableCalibration": "$radarEnabledMask[0]",
+                "sensorIndex": "$radarSensorIndices[0]"
+            }
+        },
+        "selfCalibrationRadarIntrinsicsNode1": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationradarintrinsicsnode/dwSelfCalibrationRadarIntrinsicsNode.node.json",
+            "parameters": {
+                "enableCalibration": "$radarEnabledMask[1]",
+                "sensorIndex": "$radarSensorIndices[1]"
+            }
+        },
+        "selfCalibrationRadarIntrinsicsNode2": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationradarintrinsicsnode/dwSelfCalibrationRadarIntrinsicsNode.node.json",
+            "parameters": {
+                "enableCalibration": "$radarEnabledMask[2]",
+                "sensorIndex": "$radarSensorIndices[2]"
+            }
+        },
+        "selfCalibrationRadarIntrinsicsNode3": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationradarintrinsicsnode/dwSelfCalibrationRadarIntrinsicsNode.node.json",
+            "parameters": {
+                "enableCalibration": "$radarEnabledMask[3]",
+                "sensorIndex": "$radarSensorIndices[3]"
+            }
+        },
+        "selfCalibrationRadarIntrinsicsNode4": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationradarintrinsicsnode/dwSelfCalibrationRadarIntrinsicsNode.node.json",
+            "parameters": {
+                "enableCalibration": "$radarEnabledMask[4]",
+                "sensorIndex": "$radarSensorIndices[4]"
+            }
+        },
+        "selfCalibrationRadarNode0": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationradarnode/dwSelfCalibrationRadarNode.node.json",
+            "parameters": {
+                "calibrateWheelRadii": true,
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$radarEnabledMask[0]",
+                "radarSensorIndex": "$radarSensorIndices[0]",
+                "yawPrecisionDeg": 180.100001
+            }
+        },
+        "selfCalibrationRadarNode1": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationradarnode/dwSelfCalibrationRadarNode.node.json",
+            "parameters": {
+                "calibrateWheelRadii": false,
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$radarEnabledMask[1]",
+                "radarSensorIndex": "$radarSensorIndices[1]",
+                "yawPrecisionDeg": 180.100001
+            }
+        },
+        "selfCalibrationRadarNode2": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationradarnode/dwSelfCalibrationRadarNode.node.json",
+            "parameters": {
+                "calibrateWheelRadii": false,
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$radarEnabledMask[2]",
+                "radarSensorIndex": "$radarSensorIndices[2]",
+                "yawPrecisionDeg": 180.100001
+            }
+        },
+        "selfCalibrationRadarNode3": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationradarnode/dwSelfCalibrationRadarNode.node.json",
+            "parameters": {
+                "calibrateWheelRadii": false,
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$radarEnabledMask[3]",
+                "radarSensorIndex": "$radarSensorIndices[3]",
+                "yawPrecisionDeg": 180.100001
+            }
+        },
+        "selfCalibrationRadarNode4": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationradarnode/dwSelfCalibrationRadarNode.node.json",
+            "parameters": {
+                "calibrateWheelRadii": false,
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$radarEnabledMask[4]",
+                "radarSensorIndex": "$radarSensorIndices[4]",
+                "yawPrecisionDeg": 180.100001
+            }
+        },
+        "selfCalibrationRadarNode5": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationradarnode/dwSelfCalibrationRadarNode.node.json",
+            "parameters": {
+                "calibrateWheelRadii": false,
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$radarEnabledMask[5]",
+                "radarSensorIndex": "$radarSensorIndices[5]",
+                "yawPrecisionDeg": 180.100001
+            }
+        },
+        "selfCalibrationRadarNode6": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationradarnode/dwSelfCalibrationRadarNode.node.json",
+            "parameters": {
+                "calibrateWheelRadii": false,
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$radarEnabledMask[6]",
+                "radarSensorIndex": "$radarSensorIndices[6]",
+                "yawPrecisionDeg": 180.100001
+            }
+        },
+        "selfCalibrationRadarNode7": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationradarnode/dwSelfCalibrationRadarNode.node.json",
+            "parameters": {
+                "calibrateWheelRadii": false,
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$radarEnabledMask[7]",
+                "radarSensorIndex": "$radarSensorIndices[7]",
+                "yawPrecisionDeg": 180.100001
+            }
+        },
+        "selfCalibrationRadarNode8": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationradarnode/dwSelfCalibrationRadarNode.node.json",
+            "parameters": {
+                "calibrateWheelRadii": false,
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$radarEnabledMask[8]",
+                "radarSensorIndex": "$radarSensorIndices[8]",
+                "yawPrecisionDeg": 180.100001
+            }
+        },
+        "selfCalibrationVehicleNode": {
+            "componentType": "../../../src/dwframework/dwnodes/selfcalibration/dwselfcalibrationvehiclenode/dwSelfCalibrationVehicleNode.node.json",
+            "parameters": {
+                "channelFifoSize": "$channelFifoSize",
+                "enableCalibration": "$calibrateVehicle"
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": "CAMERA_FEATURE_DETECTION[0]",
+            "dests": {
+                "selfCalibrationCameraNode0.CAMERA_FEATURE_DETECTION": {}
+            }
+        },
+        {
+            "src": "CAMERA_FEATURE_DETECTION[1]",
+            "dests": {
+                "selfCalibrationCameraNode1.CAMERA_FEATURE_DETECTION": {}
+            }
+        },
+        {
+            "src": "CAMERA_FEATURE_DETECTION[2]",
+            "dests": {
+                "selfCalibrationCameraNode2.CAMERA_FEATURE_DETECTION": {}
+            }
+        },
+        {
+            "src": "CAMERA_FEATURE_DETECTION[3]",
+            "dests": {
+                "selfCalibrationCameraNode3.CAMERA_FEATURE_DETECTION": {}
+            }
+        },
+        {
+            "src": "CAMERA_FEATURE_DETECTION[4]",
+            "dests": {
+                "selfCalibrationCameraNode4.CAMERA_FEATURE_DETECTION": {}
+            }
+        },
+        {
+            "src": "CAMERA_FEATURE_DETECTION[5]",
+            "dests": {
+                "selfCalibrationCameraNode5.CAMERA_FEATURE_DETECTION": {}
+            }
+        },
+        {
+            "src": "CAMERA_FEATURE_DETECTION[6]",
+            "dests": {
+                "selfCalibrationCameraNode6.CAMERA_FEATURE_DETECTION": {}
+            }
+        },
+        {
+            "src": "CAMERA_FEATURE_DETECTION[7]",
+            "dests": {
+                "selfCalibrationCameraNode7.CAMERA_FEATURE_DETECTION": {}
+            }
+        },
+        {
+            "src": "CAMERA_FEATURE_DETECTION[8]",
+            "dests": {
+                "selfCalibrationCameraNode8.CAMERA_FEATURE_DETECTION": {}
+            }
+        },
+        {
+            "src": "CAMERA_FEATURE_DETECTION[9]",
+            "dests": {
+                "selfCalibrationCameraNode9.CAMERA_FEATURE_DETECTION": {}
+            }
+        },
+        {
+            "src": "CAMERA_FEATURE_DETECTION[10]",
+            "dests": {
+                "selfCalibrationCameraNode10.CAMERA_FEATURE_DETECTION": {}
+            }
+        },
+        {
+            "src": "CAMERA_FEATURE_DETECTION[11]",
+            "dests": {
+                "selfCalibrationCameraNode11.CAMERA_FEATURE_DETECTION": {}
+            }
+        },
+        {
+            "src": "CAMERA_FEATURE_DETECTION[12]",
+            "dests": {
+                "selfCalibrationCameraNode12.CAMERA_FEATURE_DETECTION": {}
+            }
+        },
+        {
+            "src": "CAMERA_INTRINSICS[0]",
+            "dests": {
+                "selfCalibrationCameraNode0.CAMERA_INTRINSICS": {}
+            }
+        },
+        {
+            "src": "CAMERA_INTRINSICS[1]",
+            "dests": {
+                "selfCalibrationCameraNode1.CAMERA_INTRINSICS": {}
+            }
+        },
+        {
+            "src": "CAMERA_INTRINSICS[2]",
+            "dests": {
+                "selfCalibrationCameraNode2.CAMERA_INTRINSICS": {}
+            }
+        },
+        {
+            "src": "CAMERA_INTRINSICS[3]",
+            "dests": {
+                "selfCalibrationCameraNode3.CAMERA_INTRINSICS": {}
+            }
+        },
+        {
+            "src": "CAMERA_INTRINSICS[4]",
+            "dests": {
+                "selfCalibrationCameraNode4.CAMERA_INTRINSICS": {}
+            }
+        },
+        {
+            "src": "CAMERA_INTRINSICS[5]",
+            "dests": {
+                "selfCalibrationCameraNode5.CAMERA_INTRINSICS": {}
+            }
+        },
+        {
+            "src": "CAMERA_INTRINSICS[6]",
+            "dests": {
+                "selfCalibrationCameraNode6.CAMERA_INTRINSICS": {}
+            }
+        },
+        {
+            "src": "CAMERA_INTRINSICS[7]",
+            "dests": {
+                "selfCalibrationCameraNode7.CAMERA_INTRINSICS": {}
+            }
+        },
+        {
+            "src": "CAMERA_INTRINSICS[8]",
+            "dests": {
+                "selfCalibrationCameraNode8.CAMERA_INTRINSICS": {}
+            }
+        },
+        {
+            "src": "CAMERA_INTRINSICS[9]",
+            "dests": {
+                "selfCalibrationCameraNode9.CAMERA_INTRINSICS": {}
+            }
+        },
+        {
+            "src": "CAMERA_INTRINSICS[10]",
+            "dests": {
+                "selfCalibrationCameraNode10.CAMERA_INTRINSICS": {}
+            }
+        },
+        {
+            "src": "CAMERA_INTRINSICS[11]",
+            "dests": {
+                "selfCalibrationCameraNode11.CAMERA_INTRINSICS": {}
+            }
+        },
+        {
+            "src": "CAMERA_INTRINSICS[12]",
+            "dests": {
+                "selfCalibrationCameraNode12.CAMERA_INTRINSICS": {}
+            }
+        },
+        {
+            "src": "CAMERA_TIMESTAMP[0]",
+            "dests": {
+                "selfCalibrationCameraNode0.CAMERA_TIMESTAMP": {}
+            }
+        },
+        {
+            "src": "CAMERA_TIMESTAMP[1]",
+            "dests": {
+                "selfCalibrationCameraNode1.CAMERA_TIMESTAMP": {}
+            }
+        },
+        {
+            "src": "CAMERA_TIMESTAMP[2]",
+            "dests": {
+                "selfCalibrationCameraNode2.CAMERA_TIMESTAMP": {}
+            }
+        },
+        {
+            "src": "CAMERA_TIMESTAMP[3]",
+            "dests": {
+                "selfCalibrationCameraNode3.CAMERA_TIMESTAMP": {}
+            }
+        },
+        {
+            "src": "CAMERA_TIMESTAMP[4]",
+            "dests": {
+                "selfCalibrationCameraNode4.CAMERA_TIMESTAMP": {}
+            }
+        },
+        {
+            "src": "CAMERA_TIMESTAMP[5]",
+            "dests": {
+                "selfCalibrationCameraNode5.CAMERA_TIMESTAMP": {}
+            }
+        },
+        {
+            "src": "CAMERA_TIMESTAMP[6]",
+            "dests": {
+                "selfCalibrationCameraNode6.CAMERA_TIMESTAMP": {}
+            }
+        },
+        {
+            "src": "CAMERA_TIMESTAMP[7]",
+            "dests": {
+                "selfCalibrationCameraNode7.CAMERA_TIMESTAMP": {}
+            }
+        },
+        {
+            "src": "CAMERA_TIMESTAMP[8]",
+            "dests": {
+                "selfCalibrationCameraNode8.CAMERA_TIMESTAMP": {}
+            }
+        },
+        {
+            "src": "CAMERA_TIMESTAMP[9]",
+            "dests": {
+                "selfCalibrationCameraNode9.CAMERA_TIMESTAMP": {}
+            }
+        },
+        {
+            "src": "CAMERA_TIMESTAMP[10]",
+            "dests": {
+                "selfCalibrationCameraNode10.CAMERA_TIMESTAMP": {}
+            }
+        },
+        {
+            "src": "CAMERA_TIMESTAMP[11]",
+            "dests": {
+                "selfCalibrationCameraNode11.CAMERA_TIMESTAMP": {}
+            }
+        },
+        {
+            "src": "CAMERA_TIMESTAMP[12]",
+            "dests": {
+                "selfCalibrationCameraNode12.CAMERA_TIMESTAMP": {}
+            }
+        },
+        {
+            "src": "EGOMOTION_STATE_ODO_IMU",
+            "dests": {
+                "selfCalibrationCameraNode0.EGOMOTION_STATE_ODO_IMU": {},
+                "selfCalibrationCameraNode1.EGOMOTION_STATE_ODO_IMU": {},
+                "selfCalibrationCameraNode10.EGOMOTION_STATE_ODO_IMU": {},
+                "selfCalibrationCameraNode11.EGOMOTION_STATE_ODO_IMU": {},
+                "selfCalibrationCameraNode12.EGOMOTION_STATE_ODO_IMU": {},
+                "selfCalibrationCameraNode2.EGOMOTION_STATE_ODO_IMU": {},
+                "selfCalibrationCameraNode3.EGOMOTION_STATE_ODO_IMU": {},
+                "selfCalibrationCameraNode4.EGOMOTION_STATE_ODO_IMU": {},
+                "selfCalibrationCameraNode5.EGOMOTION_STATE_ODO_IMU": {},
+                "selfCalibrationCameraNode6.EGOMOTION_STATE_ODO_IMU": {},
+                "selfCalibrationCameraNode7.EGOMOTION_STATE_ODO_IMU": {},
+                "selfCalibrationCameraNode8.EGOMOTION_STATE_ODO_IMU": {},
+                "selfCalibrationCameraNode9.EGOMOTION_STATE_ODO_IMU": {},
+                "selfCalibrationLidarNode0.EGOMOTION_STATE_ODO_IMU": {},
+                "selfCalibrationLidarNode1.EGOMOTION_STATE_ODO_IMU": {},
+                "selfCalibrationLidarNode2.EGOMOTION_STATE_ODO_IMU": {},
+                "selfCalibrationLidarNode3.EGOMOTION_STATE_ODO_IMU": {},
+                "selfCalibrationLidarNode4.EGOMOTION_STATE_ODO_IMU": {},
+                "selfCalibrationLidarNode5.EGOMOTION_STATE_ODO_IMU": {},
+                "selfCalibrationLidarNode6.EGOMOTION_STATE_ODO_IMU": {},
+                "selfCalibrationLidarNode7.EGOMOTION_STATE_ODO_IMU": {}
+            }
+        },
+        {
+            "src": "IMU_FRAME",
+            "dests": {
+                "selfCalibrationIMUNode0.IMU_FRAME": {}
+            }
+        },
+        {
+            "src": "LIDAR_POINT_CLOUD_RAW[0]",
+            "dests": {
+                "selfCalibrationLidarNode0.LIDAR_POINT_CLOUD_RAW": {}
+            }
+        },
+        {
+            "src": "LIDAR_POINT_CLOUD_RAW[1]",
+            "dests": {
+                "selfCalibrationLidarNode1.LIDAR_POINT_CLOUD_RAW": {}
+            }
+        },
+        {
+            "src": "LIDAR_POINT_CLOUD_RAW[2]",
+            "dests": {
+                "selfCalibrationLidarNode2.LIDAR_POINT_CLOUD_RAW": {}
+            }
+        },
+        {
+            "src": "LIDAR_POINT_CLOUD_RAW[3]",
+            "dests": {
+                "selfCalibrationLidarNode3.LIDAR_POINT_CLOUD_RAW": {}
+            }
+        },
+        {
+            "src": "LIDAR_POINT_CLOUD_RAW[4]",
+            "dests": {
+                "selfCalibrationLidarNode4.LIDAR_POINT_CLOUD_RAW": {}
+            }
+        },
+        {
+            "src": "LIDAR_POINT_CLOUD_RAW[5]",
+            "dests": {
+                "selfCalibrationLidarNode5.LIDAR_POINT_CLOUD_RAW": {}
+            }
+        },
+        {
+            "src": "LIDAR_POINT_CLOUD_RAW[6]",
+            "dests": {
+                "selfCalibrationLidarNode6.LIDAR_POINT_CLOUD_RAW": {}
+            }
+        },
+        {
+            "src": "LIDAR_POINT_CLOUD_RAW[7]",
+            "dests": {
+                "selfCalibrationLidarNode7.LIDAR_POINT_CLOUD_RAW": {}
+            }
+        },
+        {
+            "src": "LIDAR_POSE[0]",
+            "dests": {
+                "selfCalibrationLidarNode0.LIDAR_POSE": {}
+            }
+        },
+        {
+            "src": "LIDAR_POSE[1]",
+            "dests": {
+                "selfCalibrationLidarNode1.LIDAR_POSE": {}
+            }
+        },
+        {
+            "src": "LIDAR_POSE[2]",
+            "dests": {
+                "selfCalibrationLidarNode2.LIDAR_POSE": {}
+            }
+        },
+        {
+            "src": "LIDAR_POSE[3]",
+            "dests": {
+                "selfCalibrationLidarNode3.LIDAR_POSE": {}
+            }
+        },
+        {
+            "src": "LIDAR_POSE[4]",
+            "dests": {
+                "selfCalibrationLidarNode4.LIDAR_POSE": {}
+            }
+        },
+        {
+            "src": "LIDAR_POSE[5]",
+            "dests": {
+                "selfCalibrationLidarNode5.LIDAR_POSE": {}
+            }
+        },
+        {
+            "src": "LIDAR_POSE[6]",
+            "dests": {
+                "selfCalibrationLidarNode6.LIDAR_POSE": {}
+            }
+        },
+        {
+            "src": "LIDAR_POSE[7]",
+            "dests": {
+                "selfCalibrationLidarNode7.LIDAR_POSE": {}
+            }
+        },
+        {
+            "src": "RADAR_DOPPLER_MOTION[0]",
+            "dests": {
+                "selfCalibrationRadarNode0.RADAR_DOPPLER_MOTION": {}
+            }
+        },
+        {
+            "src": "RADAR_DOPPLER_MOTION[1]",
+            "dests": {
+                "selfCalibrationRadarNode1.RADAR_DOPPLER_MOTION": {}
+            }
+        },
+        {
+            "src": "RADAR_DOPPLER_MOTION[2]",
+            "dests": {
+                "selfCalibrationRadarNode2.RADAR_DOPPLER_MOTION": {}
+            }
+        },
+        {
+            "src": "RADAR_DOPPLER_MOTION[3]",
+            "dests": {
+                "selfCalibrationRadarNode3.RADAR_DOPPLER_MOTION": {}
+            }
+        },
+        {
+            "src": "RADAR_DOPPLER_MOTION[4]",
+            "dests": {
+                "selfCalibrationRadarNode4.RADAR_DOPPLER_MOTION": {}
+            }
+        },
+        {
+            "src": "RADAR_DOPPLER_MOTION[5]",
+            "dests": {
+                "selfCalibrationRadarNode5.RADAR_DOPPLER_MOTION": {}
+            }
+        },
+        {
+            "src": "RADAR_DOPPLER_MOTION[6]",
+            "dests": {
+                "selfCalibrationRadarNode6.RADAR_DOPPLER_MOTION": {}
+            }
+        },
+        {
+            "src": "RADAR_DOPPLER_MOTION[7]",
+            "dests": {
+                "selfCalibrationRadarNode7.RADAR_DOPPLER_MOTION": {}
+            }
+        },
+        {
+            "src": "RADAR_DOPPLER_MOTION[8]",
+            "dests": {
+                "selfCalibrationRadarNode8.RADAR_DOPPLER_MOTION": {}
+            }
+        },
+        {
+            "src": "RADAR_SCAN[0]",
+            "dests": {
+                "selfCalibrationRadarIntrinsicsNode0.RADAR_SCAN": {},
+                "selfCalibrationRadarNode0.RADAR_SCAN": {}
+            }
+        },
+        {
+            "src": "RADAR_SCAN[1]",
+            "dests": {
+                "selfCalibrationRadarIntrinsicsNode1.RADAR_SCAN": {},
+                "selfCalibrationRadarNode1.RADAR_SCAN": {}
+            }
+        },
+        {
+            "src": "RADAR_SCAN[2]",
+            "dests": {
+                "selfCalibrationRadarIntrinsicsNode2.RADAR_SCAN": {},
+                "selfCalibrationRadarNode2.RADAR_SCAN": {}
+            }
+        },
+        {
+            "src": "RADAR_SCAN[3]",
+            "dests": {
+                "selfCalibrationRadarIntrinsicsNode3.RADAR_SCAN": {},
+                "selfCalibrationRadarNode3.RADAR_SCAN": {}
+            }
+        },
+        {
+            "src": "RADAR_SCAN[4]",
+            "dests": {
+                "selfCalibrationRadarIntrinsicsNode4.RADAR_SCAN": {},
+                "selfCalibrationRadarNode4.RADAR_SCAN": {}
+            }
+        },
+        {
+            "src": "RADAR_SCAN[5]",
+            "dests": {
+                "selfCalibrationRadarNode5.RADAR_SCAN": {}
+            }
+        },
+        {
+            "src": "RADAR_SCAN[6]",
+            "dests": {
+                "selfCalibrationRadarNode6.RADAR_SCAN": {}
+            }
+        },
+        {
+            "src": "RADAR_SCAN[7]",
+            "dests": {
+                "selfCalibrationRadarNode7.RADAR_SCAN": {}
+            }
+        },
+        {
+            "src": "RADAR_SCAN[8]",
+            "dests": {
+                "selfCalibrationRadarNode8.RADAR_SCAN": {}
+            }
+        },
+        {
+            "src": "VEHICLE_IO_ACTUATION_FEEDBACK",
+            "dests": {
+                "selfCalibrationIMUNode0.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "selfCalibrationLidarNode0.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "selfCalibrationLidarNode1.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "selfCalibrationLidarNode2.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "selfCalibrationLidarNode3.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "selfCalibrationLidarNode4.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "selfCalibrationLidarNode5.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "selfCalibrationLidarNode6.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "selfCalibrationLidarNode7.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "selfCalibrationRadarIntrinsicsNode0.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "selfCalibrationRadarIntrinsicsNode1.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "selfCalibrationRadarIntrinsicsNode2.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "selfCalibrationRadarIntrinsicsNode3.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "selfCalibrationRadarIntrinsicsNode4.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "selfCalibrationRadarNode0.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "selfCalibrationRadarNode1.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "selfCalibrationRadarNode2.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "selfCalibrationRadarNode3.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "selfCalibrationRadarNode4.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "selfCalibrationVehicleNode.VEHICLE_IO_ACTUATION_FEEDBACK": {}
+            }
+        },
+        {
+            "src": "VEHICLE_IO_NON_SAFETY_STATE",
+            "dests": {
+                "selfCalibrationCameraNode0.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationCameraNode1.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationCameraNode10.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationCameraNode11.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationCameraNode12.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationCameraNode2.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationCameraNode3.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationCameraNode4.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationCameraNode5.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationCameraNode6.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationCameraNode7.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationCameraNode8.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationCameraNode9.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationIMUNode0.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationLidarNode0.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationLidarNode1.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationLidarNode2.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationLidarNode3.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationLidarNode4.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationLidarNode5.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationLidarNode6.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationLidarNode7.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationRadarIntrinsicsNode0.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationRadarIntrinsicsNode1.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationRadarIntrinsicsNode2.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationRadarIntrinsicsNode3.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationRadarIntrinsicsNode4.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationRadarNode0.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationRadarNode1.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationRadarNode2.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationRadarNode3.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationRadarNode4.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "selfCalibrationVehicleNode.VEHICLE_IO_NON_SAFETY_STATE": {}
+            }
+        },
+        {
+            "src": "roadCastAggregatorNode.ROADCAST_DATA",
+            "dests": {
+                "ROADCAST_DATA": {}
+            }
+        },
+        {
+            "src": "roadCastAggregatorNode.ROADCAST_IMU_INTRINSICS",
+            "dests": {
+                "ROADCAST_IMU_INTRINSICS": {}
+            }
+        },
+        {
+            "src": "roadCastAggregatorNode.ROADCAST_WHEEL_RADII_DATA",
+            "dests": {
+                "ROADCAST_WHEEL_RADII_DATA": {}
+            }
+        },
+        {
+            "src": "selfCalibrationCameraNode0.CAMERA_EXTRINSICS",
+            "dests": {
+                "CAMERA_EXTRINSICS[0]": {},
+                "roadCastAggregatorNode.CAMERA_EXTRINSICS[0]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationCameraNode1.CAMERA_EXTRINSICS",
+            "dests": {
+                "CAMERA_EXTRINSICS[1]": {},
+                "roadCastAggregatorNode.CAMERA_EXTRINSICS[1]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationCameraNode10.CAMERA_EXTRINSICS",
+            "dests": {
+                "CAMERA_EXTRINSICS[10]": {},
+                "roadCastAggregatorNode.CAMERA_EXTRINSICS[10]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationCameraNode11.CAMERA_EXTRINSICS",
+            "dests": {
+                "CAMERA_EXTRINSICS[11]": {},
+                "roadCastAggregatorNode.CAMERA_EXTRINSICS[11]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationCameraNode12.CAMERA_EXTRINSICS",
+            "dests": {
+                "CAMERA_EXTRINSICS[12]": {},
+                "roadCastAggregatorNode.CAMERA_EXTRINSICS[12]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationCameraNode2.CAMERA_EXTRINSICS",
+            "dests": {
+                "CAMERA_EXTRINSICS[2]": {},
+                "roadCastAggregatorNode.CAMERA_EXTRINSICS[2]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationCameraNode3.CAMERA_EXTRINSICS",
+            "dests": {
+                "CAMERA_EXTRINSICS[3]": {},
+                "roadCastAggregatorNode.CAMERA_EXTRINSICS[3]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationCameraNode4.CAMERA_EXTRINSICS",
+            "dests": {
+                "CAMERA_EXTRINSICS[4]": {},
+                "roadCastAggregatorNode.CAMERA_EXTRINSICS[4]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationCameraNode5.CAMERA_EXTRINSICS",
+            "dests": {
+                "CAMERA_EXTRINSICS[5]": {},
+                "roadCastAggregatorNode.CAMERA_EXTRINSICS[5]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationCameraNode6.CAMERA_EXTRINSICS",
+            "dests": {
+                "CAMERA_EXTRINSICS[6]": {},
+                "roadCastAggregatorNode.CAMERA_EXTRINSICS[6]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationCameraNode7.CAMERA_EXTRINSICS",
+            "dests": {
+                "CAMERA_EXTRINSICS[7]": {},
+                "roadCastAggregatorNode.CAMERA_EXTRINSICS[7]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationCameraNode8.CAMERA_EXTRINSICS",
+            "dests": {
+                "CAMERA_EXTRINSICS[8]": {},
+                "roadCastAggregatorNode.CAMERA_EXTRINSICS[8]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationCameraNode9.CAMERA_EXTRINSICS",
+            "dests": {
+                "CAMERA_EXTRINSICS[9]": {},
+                "roadCastAggregatorNode.CAMERA_EXTRINSICS[9]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationIMUNode0.IMU_EXTRINSICS",
+            "dests": {
+                "IMU_EXTRINSICS": {},
+                "roadCastAggregatorNode.IMU_EXTRINSICS[0]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationLidarNode0.LIDAR_EXTRINSICS",
+            "dests": {
+                "LIDAR_EXTRINSICS[0]": {},
+                "roadCastAggregatorNode.LIDAR_EXTRINSICS[0]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationLidarNode1.LIDAR_EXTRINSICS",
+            "dests": {
+                "LIDAR_EXTRINSICS[1]": {},
+                "roadCastAggregatorNode.LIDAR_EXTRINSICS[1]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationLidarNode2.LIDAR_EXTRINSICS",
+            "dests": {
+                "LIDAR_EXTRINSICS[2]": {},
+                "roadCastAggregatorNode.LIDAR_EXTRINSICS[2]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationLidarNode3.LIDAR_EXTRINSICS",
+            "dests": {
+                "LIDAR_EXTRINSICS[3]": {},
+                "roadCastAggregatorNode.LIDAR_EXTRINSICS[3]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationLidarNode4.LIDAR_EXTRINSICS",
+            "dests": {
+                "LIDAR_EXTRINSICS[4]": {},
+                "roadCastAggregatorNode.LIDAR_EXTRINSICS[4]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationLidarNode5.LIDAR_EXTRINSICS",
+            "dests": {
+                "LIDAR_EXTRINSICS[5]": {},
+                "roadCastAggregatorNode.LIDAR_EXTRINSICS[5]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationLidarNode6.LIDAR_EXTRINSICS",
+            "dests": {
+                "LIDAR_EXTRINSICS[6]": {},
+                "roadCastAggregatorNode.LIDAR_EXTRINSICS[6]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationLidarNode7.LIDAR_EXTRINSICS",
+            "dests": {
+                "LIDAR_EXTRINSICS[7]": {},
+                "roadCastAggregatorNode.LIDAR_EXTRINSICS[7]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationRadarIntrinsicsNode0.RADAR_INTRINSICS",
+            "dests": {
+                "RADAR_INTRINSICS[0]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationRadarIntrinsicsNode1.RADAR_INTRINSICS",
+            "dests": {
+                "RADAR_INTRINSICS[1]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationRadarIntrinsicsNode2.RADAR_INTRINSICS",
+            "dests": {
+                "RADAR_INTRINSICS[2]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationRadarIntrinsicsNode3.RADAR_INTRINSICS",
+            "dests": {
+                "RADAR_INTRINSICS[3]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationRadarIntrinsicsNode4.RADAR_INTRINSICS",
+            "dests": {
+                "RADAR_INTRINSICS[4]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationRadarNode0.RADAR_EXTRINSICS",
+            "dests": {
+                "RADAR_EXTRINSICS[0]": {},
+                "roadCastAggregatorNode.RADAR_EXTRINSICS[0]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationRadarNode0.WHEEL_RADII",
+            "dests": {
+                "WHEEL_RADII": {},
+                "roadCastAggregatorNode.WHEEL_RADII": {}
+            }
+        },
+        {
+            "src": "selfCalibrationRadarNode1.RADAR_EXTRINSICS",
+            "dests": {
+                "RADAR_EXTRINSICS[1]": {},
+                "roadCastAggregatorNode.RADAR_EXTRINSICS[1]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationRadarNode2.RADAR_EXTRINSICS",
+            "dests": {
+                "RADAR_EXTRINSICS[2]": {},
+                "roadCastAggregatorNode.RADAR_EXTRINSICS[2]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationRadarNode3.RADAR_EXTRINSICS",
+            "dests": {
+                "RADAR_EXTRINSICS[3]": {},
+                "roadCastAggregatorNode.RADAR_EXTRINSICS[3]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationRadarNode4.RADAR_EXTRINSICS",
+            "dests": {
+                "RADAR_EXTRINSICS[4]": {},
+                "roadCastAggregatorNode.RADAR_EXTRINSICS[4]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationRadarNode5.RADAR_EXTRINSICS",
+            "dests": {
+                "RADAR_EXTRINSICS[5]": {},
+                "roadCastAggregatorNode.RADAR_EXTRINSICS[5]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationRadarNode6.RADAR_EXTRINSICS",
+            "dests": {
+                "RADAR_EXTRINSICS[6]": {},
+                "roadCastAggregatorNode.RADAR_EXTRINSICS[6]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationRadarNode7.RADAR_EXTRINSICS",
+            "dests": {
+                "RADAR_EXTRINSICS[7]": {},
+                "roadCastAggregatorNode.RADAR_EXTRINSICS[7]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationRadarNode8.RADAR_EXTRINSICS",
+            "dests": {
+                "RADAR_EXTRINSICS[8]": {},
+                "roadCastAggregatorNode.RADAR_EXTRINSICS[8]": {}
+            }
+        },
+        {
+            "src": "selfCalibrationVehicleNode.FRONT_STEERING_OFFSET",
+            "dests": {
+                "FRONT_STEERING_OFFSET": {},
+                "roadCastAggregatorNode.FRONT_STEERING_OFFSET": {}
+            }
+        }
+    ]
+}

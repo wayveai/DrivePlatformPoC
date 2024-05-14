@@ -1,0 +1,6 @@
+export DRIVEWORKS_WORKSPACE=/srv/nfs/driveworks-aarch64-linux-gnu
+export NVIDIA_SDK=/home/wayve/nvidia/nvidia_sdk
+export LINUX_TOP=$NVIDIA_SDK/DRIVE_OS_6.0.6_SDK_Linux_DRIVE_AGX_ORIN_DEVKITS/DRIVEOS/drive-linux
+cmake -B $DRIVEWORKS_WORKSPACE/build-aarch64-linux-gnu \
+      -DCMAKE_TOOLCHAIN_FILE=/usr/local/driveworks/samples/cmake/Toolchain-V5L.cmake \
+      -DVIBRANTE_PDK=$LINUX_TOP -S /usr/local/driveworks/samples

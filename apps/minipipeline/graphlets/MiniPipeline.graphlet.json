@@ -1,0 +1,81 @@
+{
+    "name": "MiniPipeline",
+    "inputPorts": {},
+    "outputPorts": {},
+    "parameters": {
+        "masterCameraIndex": {
+            "type": "size_t",
+            "default": 0
+        },
+        "streamIndex": {
+            "type": "size_t",
+            "default": 0
+        }
+    },
+    "subcomponents": {
+        "camera0": {
+            "componentType": "CameraSensor.graphlet.json",
+            "parameters": {
+                "cameraIndex": 0
+            }
+        },
+        "camera1": {
+            "componentType": "CameraSensor.graphlet.json",
+            "parameters": {
+                "cameraIndex": 1
+            }
+        },
+        "imuSensor": {
+            "componentType": "ImuSensor.graphlet.json"
+        },
+        "radarSensor0": {
+            "componentType": "RadarSensor.graphlet.json",
+            "parameters": {
+                "sensorId": 0
+            }
+        },
+        "radarSensor1": {
+            "componentType": "RadarSensor.graphlet.json",
+            "parameters": {
+                "sensorId": 1
+            }
+        },
+        "visualization": {
+            "componentType": "../nodes/Visualization.node.json",
+            "parameters": {
+                "fullscreen": true,
+                "masterCameraIndex": "$masterCameraIndex",
+                "offscreen": false,
+                "streamIndex": "$streamIndex",
+                "winSizeH": 900,
+                "winSizeW": 1600
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": "camera0.CUDA_PROCESSED",
+            "dests": {
+                "visualization.IMAGE[0]": {}
+            }
+        },
+        {
+            "src": "camera1.CUDA_PROCESSED",
+            "dests": {
+                "visualization.IMAGE[1]": {}
+            }
+        },
+        {
+            "src": "imuSensor.IMU_PROCESSED_DATA",
+            "dests": {
+                "visualization.IMU_FRAME": {}
+            }
+        },
+        {
+            "src": "radarSensor0.RADAR_PROCESSED_DATA",
+            "dests": {
+                "visualization.RADAR_PROCESSED_DATA": {}
+            }
+        }
+    ]
+}

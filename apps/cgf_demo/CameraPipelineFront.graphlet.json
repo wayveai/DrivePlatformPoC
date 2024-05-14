@@ -1,0 +1,151 @@
+{
+    "name": "CameraPipeline_derived_0",
+    "inputPorts": {
+        "VIRTUAL_SYNC_TIME": {
+            "type": "dwTime_t"
+        },
+        "SENSOR_EXTRINSICS": {
+            "type": "dwCalibratedExtrinsics"
+        }
+    },
+    "outputPorts": {
+        "SENSOR_PROPERTIES": {
+            "type": "dwSensorNodeProperties"
+        },
+        "CAMERA_INTRINSICS": {
+            "type": "dwCameraIntrinsics"
+        },
+        "IMAGE_TIMESTAMP": {
+            "type": "dwTime_t"
+        },
+        "NEXT_IMAGE_TIMESTAMP": {
+            "type": "dwTime_t"
+        },
+        "CUDA_ISP_YUV_UINT_8_HALF_RES": {
+            "type": "dwImageHandle_t",
+            "array": 2
+        },
+        "FEATURE_HISTORY_CPU": {
+            "type": "dwFeatureHistoryArray",
+            "array": 2
+        },
+        "FEATURE_HISTORY_GPU": {
+            "type": "dwFeatureHistoryArray",
+            "array": 2
+        }
+    },
+    "parameters": {
+        "fovealMode": {
+            "type": "dwFovealMode",
+            "default": "OFF"
+        },
+        "useEEPROMIntrinsics": {
+            "type": "bool",
+            "default": false
+        },
+        "cameraIndex_1": {
+            "type": "size_t",
+            "default": 0
+        },
+        "cameraIndex_2": {
+            "type": "size_t",
+            "default": 1
+        }
+    },
+    "subcomponents": {
+        "cameraSensor": {
+            "componentType": "CameraPipelineFront/CameraSensor_derived_0.graphlet.json",
+            "parameters": {
+                "*": "$*"
+            }
+        },
+        "cameraPreprocessing0": {
+            "componentType": "graphlets/CameraPreprocessingDemo.graphlet.json",
+            "parameters": {
+                "cameraIndex": "$cameraIndex_1"
+            }
+        },
+        "cameraPreprocessing1": {
+            "componentType": "graphlets/CameraPreprocessingDemo.graphlet.json",
+            "parameters": {
+                "cameraIndex": "$cameraIndex_2"
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": "SENSOR_EXTRINSICS",
+            "dests": {
+                "cameraSensor.SENSOR_EXTRINSICS": {}
+            }
+        },
+        {
+            "src": "VIRTUAL_SYNC_TIME",
+            "dests": {
+                "cameraSensor.VIRTUAL_SYNC_TIME": {}
+            }
+        },
+        {
+            "src": "cameraPreprocessing0.FEATURE_HISTORY_CPU",
+            "dests": {
+                "FEATURE_HISTORY_CPU[0]": {}
+            }
+        },
+        {
+            "src": "cameraPreprocessing0.FEATURE_HISTORY_GPU",
+            "dests": {
+                "FEATURE_HISTORY_GPU[0]": {}
+            }
+        },
+        {
+            "src": "cameraPreprocessing1.FEATURE_HISTORY_CPU",
+            "dests": {
+                "FEATURE_HISTORY_CPU[1]": {}
+            }
+        },
+        {
+            "src": "cameraPreprocessing1.FEATURE_HISTORY_GPU",
+            "dests": {
+                "FEATURE_HISTORY_GPU[1]": {}
+            }
+        },
+        {
+            "src": "cameraSensor.CUDA_ISP_YUV_UINT_8_HALF_RES[0]",
+            "dests": {
+                "CUDA_ISP_YUV_UINT_8_HALF_RES[0]": {},
+                "cameraPreprocessing0.IMAGE": {}
+            }
+        },
+        {
+            "src": "cameraSensor.CUDA_ISP_YUV_UINT_8_HALF_RES[1]",
+            "dests": {
+                "CUDA_ISP_YUV_UINT_8_HALF_RES[1]": {},
+                "cameraPreprocessing1.IMAGE": {}
+            }
+        },
+        {
+            "src": "cameraSensor.IMAGE_TIMESTAMP",
+            "dests": {
+                "IMAGE_TIMESTAMP": {}
+            }
+        },
+        {
+            "src": "cameraSensor.INTRINSICS",
+            "dests": {
+                "CAMERA_INTRINSICS": {}
+            }
+        },
+        {
+            "src": "cameraSensor.NEXT_IMAGE_TIMESTAMP",
+            "dests": {
+                "NEXT_IMAGE_TIMESTAMP": {}
+            }
+        },
+        {
+            "src": "cameraSensor.SENSOR_PROPERTIES",
+            "dests": {
+                "SENSOR_PROPERTIES": {}
+            }
+        }
+    ]
+}

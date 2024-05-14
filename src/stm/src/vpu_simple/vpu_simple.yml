@@ -1,0 +1,63 @@
+---
+Version: 11.0.0
+vpu_simple:
+  Identifier: 10
+  Resources:
+    CPU:
+    - CPU0
+    VPU:
+    - VPU0
+  Hyperepochs:
+  - hyperepoch0:
+      Epochs:
+      - epoch0:
+          Period: 100ms
+  Clients:
+  - client0:
+      Resources:
+        PVA_STREAM:
+        - PVA_STREAM0: VPU0
+      Epochs:
+      - hyperepoch0.epoch0:
+          Runnables:
+          - vpuSubmit0:
+              WCET: 10ms
+              Dependencies: []
+              Submits: client0.vpuSubmittee0
+              Resources:
+              - CPU0
+              - PVA_STREAM
+          - vpuSubmit1:
+              WCET: 10ms
+              Dependencies: []
+              Submits: client0.vpuSubmittee1
+              Resources:
+              - CPU0
+              - PVA_STREAM
+          - vpuSubmittee0:
+              WCET: 10ms
+              Dependencies:
+              - client0.confirmUnfinished
+              Resources:
+              - VPU
+          - vpuSubmittee1:
+              WCET: 10ms
+              Dependencies:
+              - client0.vpuSubmittee0
+              Resources:
+              - VPU
+          - confirmUnfinished:
+              WCET: 10ms
+              Dependencies:
+              - client0.vpuSubmit0
+              - client0.vpuSubmit1
+              Resources:
+              - CPU0
+          - confirmFinished:
+              WCET: 10ms
+              Dependencies:
+              - client0.vpuSubmittee0
+              - client0.vpuSubmittee1
+              Resources:
+              - CPU0
+...

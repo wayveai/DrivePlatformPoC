@@ -1,0 +1,25 @@
+{
+    "buildType": {
+        "default": "x86_64-linux-gnu",
+        "choices": {
+            "x86_64-linux-gnu": {
+                "short": "x86_64-linux-gnu",
+                "long": "Build for host",
+                "buildType": "x86_64-linux-gnu",
+                "settings": {
+                    "DRIVEWORKS_DIR": "/usr/local/driveworks"
+                }
+            },
+            "aarch64-linux-gnu": {
+                "short": "aarch64-linux-gnu",
+                "long": "Build for target",
+                "buildType": "aarch64-linux-gnu",
+                "settings": {
+                    "CMAKE_TOOLCHAIN_FILE": "/usr/local/driveworks/samples/cmake/Toolchain-V5L.cmake",
+                    "VIBRANTE_PDK": "/drive/drive-linux",
+                    "DRIVEWORKS_DIR": "/usr/local/driveworks"
+                }
+            }      
+        }
+    }
+}

@@ -1,0 +1,50 @@
+{
+    "hyperion_8.1": {
+        "synthesizedCameraFC60": "camera:front:wide:120fov",
+        "vehicleSensor0": "can:vehicle",
+        "gps0": "gps:ublox:f9k",
+        "gps1": "gps:novatel",
+        "imu0": "imu:continental",
+        "imu1": "imu:continental:safety",
+        "imu2": "imu:novatel",
+        "ultrasonic": "uss:valeo"
+    },
+    "hy8.1_daimler_gls": {
+        "synthesizedCameraFC60": "camera:front:wide:120fov",
+        "vehicleSensor0": "data:daimler",
+        "gps0": "gps:novatel",
+        "gps1": "gps:novatel",
+        "imu0": "imu:novatel",
+        "imu1": "imu:novatel",
+        "ultrasonic": "uss:valeo",
+        "lidar:front:center:p128": "lidar:gt:top:p128"
+    },
+    "sim_hyperion_8.1_daimler_s223": {
+        "synthesizedCameraFC60": "camera:front:wide:120fov",
+        "vehicleSensor0": "data:daimler",
+        "gps0": "gps:simulator",
+        "imu0": "imu:simulator",
+        "ultrasonic": "uss:valeo"
+    },
+    "hyperion_8.1_sat": {},
+    "hy8.1_daimler_c118": {
+        "synthesizedCameraFC60": "camera:front:wide:120fov",
+        "vehicleSensor0": "data:daimler",
+        "timeSensor0": "time:nvpps:rec:00",
+        "gps0": "gps:vehicle",
+        "imu0": "imu:vehicle",
+        "ultrasonic": "uss:valeo"
+    },
+    "hyperion_8.1_daimler_c118": {
+        "synthesizedCameraFC60": "camera:front:wide:120fov",
+        "vehicleSensor0": "data:daimler",
+        "timeSensor0": "time:nvpps:rec:00",
+        "gps0": "gps:vehicle",
+        "imu0": "imu:vehicle",
+        "ultrasonic": "uss:valeo"
+    },
+    "hyperion_8.1_daimler_c118_sat": {
+        "vehicleSensor0": "data:daimler",
+        "timeSensor0": "time:nvpps:rec:00"
+    }
+}

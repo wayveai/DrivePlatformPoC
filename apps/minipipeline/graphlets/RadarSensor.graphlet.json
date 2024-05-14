@@ -1,0 +1,90 @@
+{
+    "name": "RadarSensor",
+    "inputPorts": {
+        "VIRTUAL_SYNC_TIME": {
+            "type": "dwTime_t"
+        },
+        "SENSOR_EXTRINSICS": {
+            "type": "dwCalibratedExtrinsics"
+        }
+    },
+    "outputPorts": {
+        "SENSOR_PROPERTIES": {
+            "type": "dwSensorNodeProperties"
+        },
+        "RADAR_PROCESSED_DATA": {
+            "type": "dwRadarScan"
+        },
+        "RADAR_TIMESTAMP": {
+            "type": "dwSensorTsAndID"
+        },
+        "NEXT_RADAR_TIMESTAMP": {
+            "type": "dwTime_t"
+        }
+    },
+    "parameters": {
+        "sensorId": {
+            "type": "size_t",
+            "default": 0
+        },
+        "sensorAffinityMask": {
+            "type": "int32_t",
+            "default": 1
+        },
+        "sensorThreadPriority": {
+            "type": "int32_t",
+            "default": 99
+        },
+        "frameSkipMask": {
+            "type": "dw::core::FixedString<32>",
+            "default": ""
+        }
+    },
+    "subcomponents": {
+        "radarNode": {
+            "componentType": "../../../src/dwframework/dwnodes/sensors/dwradarnode/dwRadarNode.node.json",
+            "parameters": {
+                "frameSkipMask": "$frameSkipMask",
+                "sensorId": "$sensorId"
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": "SENSOR_EXTRINSICS",
+            "dests": {
+                "radarNode.SENSOR_EXTRINSICS": {}
+            }
+        },
+        {
+            "src": "VIRTUAL_SYNC_TIME",
+            "dests": {
+                "radarNode.VIRTUAL_SYNC_TIME": {}
+            }
+        },
+        {
+            "src": "radarNode.NEXT_TIMESTAMP",
+            "dests": {
+                "NEXT_RADAR_TIMESTAMP": {}
+            }
+        },
+        {
+            "src": "radarNode.PROCESSED_DATA",
+            "dests": {
+                "RADAR_PROCESSED_DATA": {}
+            }
+        },
+        {
+            "src": "radarNode.SENSOR_PROPERTIES",
+            "dests": {
+                "SENSOR_PROPERTIES": {}
+            }
+        },
+        {
+            "src": "radarNode.TIMESTAMP",
+            "dests": {
+                "RADAR_TIMESTAMP": {}
+            }
+        }
+    ]
+}

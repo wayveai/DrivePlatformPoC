@@ -1,0 +1,112 @@
+{
+    "hyperion_8": {
+        "synthesizedCameraFC60": "camera:front:wide:120fov",
+        "vehicleSensor0": "can:0",
+        "vehicleSensor1": "can:1",
+        "gps0": "gps:ublox:f9k",
+        "gps1": "gps:novatel",
+        "imu0": "imu:continental",
+        "imu1": "imu:continental:safety",
+        "imu2": "imu:novatel",
+        "ultrasonic": "uss:valeo"
+    },
+    "hyperion_8_protoplus": {
+        "synthesizedCameraFC60": "camera:front:wide:120fov",
+        "vehicleSensor0": "can:0",
+        "vehicleSensor1": "can:1",
+        "gps0": "gps:ublox:f9k",
+        "gps1": "gps:novatel",
+        "imu0": "imu:continental",
+        "imu1": "imu:continental:safety",
+        "imu2": "imu:novatel",
+        "ultrasonic": "uss:valeo"
+    },
+    "hyperion_8_protoplus_parking": {
+        "synthesizedCameraFC60": "camera:front:wide:120fov",
+        "vehicleSensor0": "can:0",
+        "vehicleSensor1": "can:1",
+        "gps0": "gps:ublox:f9k",
+        "gps1": "gps:novatel",
+        "imu0": "imu:continental",
+        "imu1": "imu:continental:safety",
+        "imu2": "imu:novatel",
+        "ultrasonic": "uss:valeo"
+    },
+    "hy8": {
+        "synthesizedCameraFC60": "camera:front:wide:120fov",
+        "vehicleSensor0": "can:0",
+        "vehicleSensor1": "can:1",
+        "gps0": "gps:ublox:f9k",
+        "gps1": "gps:novatel",
+        "imu0": "imu:continental",
+        "imu1": "imu:continental:safety",
+        "imu2": "imu:novatel",
+        "ultrasonic": "uss:valeo"
+    },
+    "hy8_protoplus": {
+        "synthesizedCameraFC60": "camera:front:wide:120fov",
+        "vehicleSensor0": "can:0",
+        "vehicleSensor1": "can:1",
+        "gps0": "gps:ublox:f9k",
+        "gps1": "gps:novatel",
+        "imu0": "imu:continental",
+        "imu1": "imu:continental:safety",
+        "imu2": "imu:novatel",
+        "ultrasonic": "uss:valeo"
+    },
+    "hy8_protoplus_parking": {
+        "synthesizedCameraFC60": "camera:front:wide:120fov",
+        "vehicleSensor0": "can:0",
+        "vehicleSensor1": "can:1",
+        "gps0": "gps:ublox:f9k",
+        "gps1": "gps:novatel",
+        "imu0": "imu:continental",
+        "imu1": "imu:continental:safety",
+        "imu2": "imu:novatel",
+        "ultrasonic": "uss:valeo"
+    },
+    "sim_hyperion_8_daimler_s223": {
+        "synthesizedCameraFC60": "camera:front:wide:120fov",
+        "vehicleSensor0": "data:daimler",
+        "gps0": "gps:simulator",
+        "imu0": "imu:simulator",
+        "ultrasonic": "uss:valeo"
+    },
+    "hyperion_8_daimler_s223": {
+        "synthesizedCameraFC60": "camera:front:wide:120fov",
+        "vehicleSensor0": "data:daimler",
+        "gps0": "gps:ublox:f9k",
+        "imu0": "imu:continental",
+        "ultrasonic": "uss:valeo"
+    },
+    "hyperion_8.1p_8.0s_daimler_s223": {
+        "synthesizedCameraFC60": "camera:front:wide:120fov",
+        "vehicleSensor0": "data:daimler",
+        "gps0": "gps:ublox:f9k",
+        "imu0": "imu:continental",
+        "ultrasonic": "uss:valeo"
+    },
+    "hyperion_8_daimler_s222": {
+        "synthesizedCameraFC60": "camera:front:wide:120fov",
+        "vehicleSensor0": "data:daimler",
+        "gps0": "gps:ublox:f9k",
+        "imu0": "imu:continental",
+        "ultrasonic": "uss:valeo",
+        "lidar:front:center:p128": "lidar:gt:top:p128"
+    },
+    "hy8_daimler": {
+        "synthesizedCameraFC60": "camera:front:wide:120fov",
+        "vehicleSensor0": "data:daimler",
+        "gps0": "gps:ublox:f9k",
+        "imu0": "imu:continental",
+        "ultrasonic": "uss:valeo",
+        "lidar:front:center:p128": "lidar:gt:top:p128"
+    },
+    "SIM-HPY8": {
+        "synthesizedCameraFC60": "camera:front:wide:120fov",
+        "vehicleSensor0": "can:vehicle",
+        "gps0": "gps:simulator",
+        "imu0": "imu:simulator",
+        "ultrasonic": "uss:valeo"
+    }
+}

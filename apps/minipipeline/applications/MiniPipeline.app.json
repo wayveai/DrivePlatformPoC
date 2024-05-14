@@ -1,0 +1,161 @@
+{
+    "name": "MiniPipelineApp",
+    "logSpec": "file/rfc5424:{{logpath}}/{{appname}}.log",
+    "parameters": {
+        "imageWidth0": {
+            "type": "string",
+            "default": "1920"
+        },
+        "imageHeight0": {
+            "type": "string",
+            "default": "1208"
+        },
+        "imageFov0": {
+            "type": "string",
+            "default": "ISP_120FOV"
+        },
+        "imageWidth1": {
+            "type": "string",
+            "default": "1920"
+        },
+        "imageHeight1": {
+            "type": "string",
+            "default": "1208"
+        },
+        "imageFov1": {
+            "type": "string",
+            "default": "ISP_60FOV"
+        },
+        "imageWidth2": {
+            "type": "string",
+            "default": "1920"
+        },
+        "imageHeight2": {
+            "type": "string",
+            "default": "1208"
+        },
+        "imageFov2": {
+            "type": "string",
+            "default": "ISP_60FOV"
+        },
+        "imageWidth3": {
+            "type": "string",
+            "default": "1920"
+        },
+        "imageHeight3": {
+            "type": "string",
+            "default": "1208"
+        },
+        "imageFov3": {
+            "type": "string",
+            "default": "ISP_120FOV"
+        }
+    },
+    "requiredSensors": "./MiniPipeline.required-sensors.json",
+    "sensorMappingLookups": [
+        "../../../apps/roadrunner-2.0/config/sensor_mappings"
+    ],
+    "subcomponents": {
+        "miniPipeline": {
+            "componentType": "../graphlets/MiniPipeline.graphlet.json",
+            "parameters": {}
+        }
+    },
+    "connections": [],
+    "states": {
+        "STANDARD": {
+            "stmScheduleKey": "standardSchedule",
+            "default": true
+        }
+    },
+    "stmSchedules": {
+        "standardSchedule": {
+            "wcet": "./MiniPipeline_wcet.yaml",
+            "hyperepochs": {
+                "mainHyperepoch": {
+                    "period": 33000000,
+                    "epochs": {
+                        "mainEpoch": {
+                            "period": 33000000,
+                            "frames": 1,
+                            "passes": [
+                                [
+                                    "miniPipeline.imuSensor",
+                                    "miniPipeline.radarSensor0",
+                                    "miniPipeline.radarSensor1"
+                                ]
+                            ]
+                        }
+                    },
+                    "resources": {
+                        "machine0.CPU0": []
+                    }
+                },
+                "renderHyperepoch": {
+                    "period": 33000000,
+                    "epochs": {
+                        "renderEpoch": {
+                            "period": 33000000,
+                            "frames": 1,
+                            "passes": [
+                                [
+                                    "miniPipeline.camera0",
+                                    "miniPipeline.camera1",
+                                    "miniPipeline.visualization"
+                                ]
+                            ]
+                        }
+                    },
+                    "resources": {
+                        "machine0.CPU1": [],
+                        "machine0.CPU2": [],
+                        "machine0.CPU3": [],
+                        "machine0.CPU4": [],
+                        "machine0.dGPU": [],
+                        "mainClient.CUDA_STREAM0:dGPU": [],
+                        "mainClient.CUDA_MUTEX_LOCK": []
+                    }
+                }
+            }
+        }
+    },
+    "processes": {
+        "ssm": {
+            "runOn": "machine0",
+            "executable": "SSM/vanillassm"
+        },
+        "schedule_manager": {
+            "runOn": "machine0",
+            "executable": "ScheduleManager",
+            "argv": {
+                "--enableScheduleSwitching": "true",
+                "--scheduleManagerHostIP": "127.0.0.1",
+                "--scheduleManagerHostPort": "4010",
+                "--scheduleManagerNumClients": "1"
+            }
+        },
+        "stm_master": {
+            "runOn": "machine0",
+            "executable": "stm_master",
+            "argv": {
+                "--timeout-us": "80000000",
+                "--log": "stm_sreport",
+                "--soc": "TegraA",
+                "-m": true
+            }
+        },
+        "mainClient": {
+            "runOn": "machine0",
+            "executable": "LoaderLite",
+            "subcomponents": [
+                "miniPipeline.camera0",
+                "miniPipeline.camera1",
+                "miniPipeline.radarSensor0",
+                "miniPipeline.radarSensor1",
+                "miniPipeline.imuSensor",
+                "miniPipeline.visualization"
+            ]
+        }
+    },
+    "extraInfo": "./MiniPipelineExtraInfo.json"
+}

@@ -1,0 +1,66 @@
+{
+    "library": "libsensorsync_node.so",
+    "name": "dw::framework::SensorSyncNode",
+    "inputPorts": {
+        "SENSOR_TIMESTAMP": {
+            "type": "dwTime_t",
+            "array": 13
+        }
+    },
+    "outputPorts": {
+        "SYNC_TIMESTAMP": {
+            "type": "dwTime_t",
+            "array": 13
+        }
+    },
+    "parameters": {
+        "minTimestep": {
+            "type": "dwTime_t",
+            "default": 0
+        },
+        "disableDeterministic": {
+            "type": "bool",
+            "default": false
+        },
+        "epochId": {
+            "type": "uint32_t",
+            "default": 0
+        },
+        "syncServerHostIP": {
+            "type": "std::string",
+            "default": "127.0.0.1"
+        },
+        "syncServerHostPort": {
+            "type": "uint16_t",
+            "default": 40001
+        },
+        "logTimestampDiff": {
+            "type": "bool",
+            "default": false
+        },
+        "logTimestampDiffInterval": {
+            "type": "uint32_t",
+            "default": 0
+        }
+    },
+    "passes": [
+        {
+            "name": "SETUP",
+            "processorTypes": [
+                "CPU"
+            ]
+        },
+        {
+            "name": "WAIT",
+            "processorTypes": [
+                "CPU"
+            ]
+        },
+        {
+            "name": "TEARDOWN",
+            "processorTypes": [
+                "CPU"
+            ]
+        }
+    ]
+}
