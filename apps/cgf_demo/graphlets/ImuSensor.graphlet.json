@@ -1,0 +1,85 @@
+{
+    "name": "ImuSensor",
+    "inputPorts": {
+        "IMU_VIRTUAL_SYNC_TIME": {
+            "type": "dwTime_t"
+        },
+        "IMU_SENSOR_EXTRINSICS": {
+            "type": "dwCalibratedExtrinsics"
+        }
+    },
+    "outputPorts": {
+        "IMU_SENSOR_PROPERTIES": {
+            "type": "dwSensorNodeProperties"
+        },
+        "IMU_PROCESSED_DATA": {
+            "type": "dwIMUFrame"
+        },
+        "IMU_TIMESTAMP": {
+            "type": "dwSensorTsAndID"
+        },
+        "NEXT_IMU_TIMESTAMP": {
+            "type": "dwTime_t"
+        }
+    },
+    "parameters": {
+        "sensorAffinityMask": {
+            "type": "int32_t",
+            "default": 1
+        },
+        "sensorThreadPriority": {
+            "type": "int32_t",
+            "default": 99
+        },
+        "frameSkipMask": {
+            "type": "dw::core::FixedString<32>",
+            "default": ""
+        }
+    },
+    "subcomponents": {
+        "imuNode": {
+            "componentType": "../../../src/dwframework/dwnodes/sensors/dwimunode/dwIMUNode.node.json",
+            "parameters": {
+                "frameSkipMask": "$frameSkipMask"
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": "IMU_SENSOR_EXTRINSICS",
+            "dests": {
+                "imuNode.SENSOR_EXTRINSICS": {}
+            }
+        },
+        {
+            "src": "IMU_VIRTUAL_SYNC_TIME",
+            "dests": {
+                "imuNode.VIRTUAL_SYNC_TIME": {}
+            }
+        },
+        {
+            "src": "imuNode.NEXT_TIMESTAMP",
+            "dests": {
+                "NEXT_IMU_TIMESTAMP": {}
+            }
+        },
+        {
+            "src": "imuNode.PROCESSED_DATA",
+            "dests": {
+                "IMU_PROCESSED_DATA": {}
+            }
+        },
+        {
+            "src": "imuNode.SENSOR_PROPERTIES",
+            "dests": {
+                "IMU_SENSOR_PROPERTIES": {}
+            }
+        },
+        {
+            "src": "imuNode.TIMESTAMP",
+            "dests": {
+                "IMU_TIMESTAMP": {}
+            }
+        }
+    ]
+}

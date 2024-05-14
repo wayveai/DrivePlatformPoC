@@ -1,0 +1,143 @@
+args.submitter_fence = False
+Runnable Fusion done in cameraHyperepoch. Performed 136 fusions.
+Runnable Fusion done in imuHyperepoch. Performed 20 fusions.
+Runnable Fusion done in radarHyperepoch. Performed 17 fusions.
+Generating a schedule in bazel-out/k8-opt/bin/apps/cgf_demo/CGFDemo__slowSchedule.stm
+MainProcess: Finished receiving all schedules
+Hyperepoch: cameraHyperepoch
+-Epoch: cameraEpoch
+-Epoch: radarDopplerMotionEpoch
+-Epoch: renderEpoch
+ final schedule 8045002
+MainProcess: Finished receiving all schedules
+Hyperepoch: imuHyperepoch
+-Epoch: imuEpoch
+ final schedule 598001
+MainProcess: Finished receiving all schedules
+Hyperepoch: radarHyperepoch
+-Epoch: radarEpoch
+ final schedule 282001
+Fused Runnables decoupling is done. Original graph restored.
+--------------------------------------------------------------------------------
+Verifying schedule for 1 frames
+Verifying frame 0
+Frame 0 verified
+Schedule verified
+KPIs:
+--------------------------------------------------------------------------------
+Key                                                               Value                                                          Description
+----------------------------------------------------------------  -------------------------------------------------------------  ----------------------------------------------------------------------------------------
+graph_id                                                          slowSchedule
+yaml_filepath                                                     bazel-out/k8-opt/bin/apps/cgf_demo/CGFDemo__slowSchedule.yaml
+yaml_md5sum                                                       6a80852d21000d899ee120d1abc70d55
+heuristic                                                         BNB                                                            Compilation algorithm used
+timeout                                                           0 s                                                            BNB algorithm timeout
+num_workers                                                       4                                                              Number of BNB Workers
+cameraHyperepoch_num_runnables                                    503                                                            Number of runnables in hyperepoch
+cameraHyperepoch_schedule_length                                  8.05 ms                                                        Total length of hyperepoch schedule
+cameraHyperepoch_critical_path_length                             3.73 ms                                                        Length of longest path from root to leaf
+cameraHyperepoch_frames_per_sec                                   124.30
+cameraHyperepoch_runnables_fused_count                            136                                                            Number of runnables fused in this hyperepoch
+cameraHyperepoch_num_CPUs                                         4
+cameraHyperepoch_total_CPU_load                                   11.87 ms                                                       Round Robin runnables are averaged
+cameraHyperepoch_average_CPU_load                                 2.97 ms                                                        Round Robin runnables averaged
+cameraHyperepoch_external_CPU_fragmentation                       63.13 %                                                        Percentage time CPU will be empty assuming all runnables run for their worst case
+cameraHyperepoch_num_GPUs                                         1
+cameraHyperepoch_total_GPU_load                                   7.69 ms                                                        Round Robin runnables are averaged
+cameraHyperepoch_average_GPU_load                                 7.69 ms                                                        Round Robin runnables averaged
+cameraHyperepoch_external_GPU_fragmentation                       4.45 %                                                         Percentage time GPU will be empty assuming all runnables run for their worst case
+cameraHyperepoch_num_DLAs                                         0
+cameraHyperepoch_num_VPUs                                         0
+cameraHyperepoch_num_CUDAStreams                                  5
+cameraHyperepoch_total_CUDAStream_load                            6.92 ms                                                        Round Robin runnables are averaged
+cameraHyperepoch_average_CUDAStream_load                          1.38 ms                                                        Round Robin runnables averaged
+cameraHyperepoch_external_CUDAStream_fragmentation                82.79 %                                                        Percentage time CUDAStream will be empty assuming all runnables run for their worst case
+cameraHyperepoch_num_PVAStreams                                   0
+cameraHyperepoch_num_VulkanQueues                                 0
+cameraHyperepoch_critical_path_SOL                                3.73 ms                                                        Assuming infinite resources,no schedule can run faster than critical path
+cameraHyperepoch_CPU_SOL                                          2.97 ms                                                        Assuming no graph dependencies, no schedule can run faster than average CPU load
+cameraHyperepoch_GPU_SOL                                          7.69 ms                                                        Assuming no graph dependencies, no schedule can run faster than average GPU load
+cameraHyperepoch_CUDAStream_SOL                                   1.38 ms                                                        Assuming no graph dependencies, no schedule can run faster than average CUDAStream load
+cameraHyperepoch_theoretical_SOL_estimate                         7.69 ms                                                        Max of critical path SOL and resource SOLs
+cameraHyperepoch_percentage_SOL                                   95.55 %                                                        Theoretical SOL estimate / Schedule Length * 100
+cameraHyperepoch_Largest_SOL                                      GPU                                                            Largest among all SOLs.
+cameraHyperepoch.cameraEpoch_frame_0_num_runnables                440                                                            Number of runnables in epoch
+cameraHyperepoch.cameraEpoch_frame_0_schedule_start               0 ns                                                           Start time of epoch
+cameraHyperepoch.cameraEpoch_frame_0_schedule_end                 8.05 ms                                                        End time of epoch
+cameraHyperepoch.cameraEpoch_frame_0_schedule_length              8.05 ms                                                        Total length of epoch schedule
+cameraHyperepoch.radarDopplerMotionEpoch_frame_0_num_runnables    55                                                             Number of runnables in epoch
+cameraHyperepoch.radarDopplerMotionEpoch_frame_0_schedule_start   7.00 us                                                        Start time of epoch
+cameraHyperepoch.radarDopplerMotionEpoch_frame_0_schedule_end     2.04 ms                                                        End time of epoch
+cameraHyperepoch.radarDopplerMotionEpoch_frame_0_schedule_length  2.03 ms                                                        Total length of epoch schedule
+cameraHyperepoch.renderEpoch_frame_0_num_runnables                7                                                              Number of runnables in epoch
+cameraHyperepoch.renderEpoch_frame_0_schedule_start               7.00 us                                                        Start time of epoch
+cameraHyperepoch.renderEpoch_frame_0_schedule_end                 13.00 us                                                       End time of epoch
+cameraHyperepoch.renderEpoch_frame_0_schedule_length              6.00 us                                                        Total length of epoch schedule
+imuHyperepoch_num_runnables                                       26                                                             Number of runnables in hyperepoch
+imuHyperepoch_schedule_length                                     598.00 us                                                      Total length of hyperepoch schedule
+imuHyperepoch_critical_path_length                                537.00 us                                                      Length of longest path from root to leaf
+imuHyperepoch_frames_per_sec                                      1672.24
+imuHyperepoch_runnables_fused_count                               20                                                             Number of runnables fused in this hyperepoch
+imuHyperepoch_num_CPUs                                            1
+imuHyperepoch_total_CPU_load                                      598.00 us                                                      Round Robin runnables are averaged
+imuHyperepoch_average_CPU_load                                    598.00 us                                                      Round Robin runnables averaged
+imuHyperepoch_external_CPU_fragmentation                          0.00 %                                                         Percentage time CPU will be empty assuming all runnables run for their worst case
+imuHyperepoch_num_GPUs                                            0
+imuHyperepoch_num_DLAs                                            0
+imuHyperepoch_num_VPUs                                            0
+imuHyperepoch_num_CUDAStreams                                     0
+imuHyperepoch_num_PVAStreams                                      0
+imuHyperepoch_num_VulkanQueues                                    0
+imuHyperepoch_critical_path_SOL                                   537.00 us                                                      Assuming infinite resources,no schedule can run faster than critical path
+imuHyperepoch_CPU_SOL                                             598.00 us                                                      Assuming no graph dependencies, no schedule can run faster than average CPU load
+imuHyperepoch_theoretical_SOL_estimate                            598.00 us                                                      Max of critical path SOL and resource SOLs
+imuHyperepoch_percentage_SOL                                      100.00 %                                                       Theoretical SOL estimate / Schedule Length * 100
+imuHyperepoch_Largest_SOL                                         CPU                                                            Largest among all SOLs.
+imuHyperepoch.imuEpoch_frame_0_num_runnables                      26                                                             Number of runnables in epoch
+imuHyperepoch.imuEpoch_frame_0_schedule_start                     0 ns                                                           Start time of epoch
+imuHyperepoch.imuEpoch_frame_0_schedule_end                       598.00 us                                                      End time of epoch
+imuHyperepoch.imuEpoch_frame_0_schedule_length                    598.00 us                                                      Total length of epoch schedule
+radarHyperepoch_num_runnables                                     24                                                             Number of runnables in hyperepoch
+radarHyperepoch_schedule_length                                   282.00 us                                                      Total length of hyperepoch schedule
+radarHyperepoch_critical_path_length                              116.00 us                                                      Length of longest path from root to leaf
+radarHyperepoch_frames_per_sec                                    3546.09
+radarHyperepoch_runnables_fused_count                             17                                                             Number of runnables fused in this hyperepoch
+radarHyperepoch_num_CPUs                                          1
+radarHyperepoch_total_CPU_load                                    282.00 us                                                      Round Robin runnables are averaged
+radarHyperepoch_average_CPU_load                                  282.00 us                                                      Round Robin runnables averaged
+radarHyperepoch_external_CPU_fragmentation                        0.00 %                                                         Percentage time CPU will be empty assuming all runnables run for their worst case
+radarHyperepoch_num_GPUs                                          0
+radarHyperepoch_num_DLAs                                          0
+radarHyperepoch_num_VPUs                                          0
+radarHyperepoch_num_CUDAStreams                                   0
+radarHyperepoch_num_PVAStreams                                    0
+radarHyperepoch_num_VulkanQueues                                  0
+radarHyperepoch_critical_path_SOL                                 116.00 us                                                      Assuming infinite resources,no schedule can run faster than critical path
+radarHyperepoch_CPU_SOL                                           282.00 us                                                      Assuming no graph dependencies, no schedule can run faster than average CPU load
+radarHyperepoch_theoretical_SOL_estimate                          282.00 us                                                      Max of critical path SOL and resource SOLs
+radarHyperepoch_percentage_SOL                                    100.00 %                                                       Theoretical SOL estimate / Schedule Length * 100
+radarHyperepoch_Largest_SOL                                       CPU                                                            Largest among all SOLs.
+radarHyperepoch.radarEpoch_frame_0_num_runnables                  24                                                             Number of runnables in epoch
+radarHyperepoch.radarEpoch_frame_0_schedule_start                 0 ns                                                           Start time of epoch
+radarHyperepoch.radarEpoch_frame_0_schedule_end                   282.00 us                                                      End time of epoch
+radarHyperepoch.radarEpoch_frame_0_schedule_length                282.00 us                                                      Total length of epoch schedule
+Total runnables                                                   553                                                            Total Runnables in the graph
+compilation_time                                                  0:00:13.700926                                                 Time taken by stmcompiler to generate schedule
+CPU SyncObjects                                                   25                                                             Number of CPU-only Sync Objects (CPU Waiters and Signalers)
+Engine SyncObjects                                                125                                                            Number of Engine Sync Objects (can have CPU Waiters or Signalers)
+Total SyncObjects                                                 150                                                            Total number of Engine and CPU Sync Objects
+CPU Fences                                                        119                                                            Number of CPU-only Fences (CPU Waiters and Signalers)
+Engine Fences                                                     186                                                            Number of Engine Fences (can have CPU Waiters or Signalers)
+Total Fences                                                      305                                                            Total number of Engine and CPU Fences
+cameraHyperepoch_os_sync_objects                                  21                                                             Total OsSync Objects in cameraHyperepoch
+cameraHyperepoch_nvsci_sync_objects                               125                                                            Total NvSciSync Objects in cameraHyperepoch
+cameraHyperepoch_cond_var_fences                                  115                                                            Total Cond_var Fences in cameraHyperepoch
+cameraHyperepoch_nvsci_sync_fences                                186                                                            Total NvSciSync Fences in cameraHyperepoch
+imuHyperepoch_os_sync_objects                                     2                                                              Total OsSync Objects in imuHyperepoch
+imuHyperepoch_nvsci_sync_objects                                  0                                                              Total NvSciSync Objects in imuHyperepoch
+imuHyperepoch_cond_var_fences                                     2                                                              Total Cond_var Fences in imuHyperepoch
+imuHyperepoch_nvsci_sync_fences                                   0                                                              Total NvSciSync Fences in imuHyperepoch
+radarHyperepoch_os_sync_objects                                   2                                                              Total OsSync Objects in radarHyperepoch
+radarHyperepoch_nvsci_sync_objects                                0                                                              Total NvSciSync Objects in radarHyperepoch
+radarHyperepoch_cond_var_fences                                   2                                                              Total Cond_var Fences in radarHyperepoch
+radarHyperepoch_nvsci_sync_fences                                 0                                                              Total NvSciSync Fences in radarHyperepoch

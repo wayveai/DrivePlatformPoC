@@ -1,0 +1,67 @@
+---
+Version: 3.0.0
+cpu_gpu_2:
+  Identifier: 102
+  Resources:
+    CPU:
+    - CPU1
+    GPU:
+    - iGPU
+  Hyperepochs:
+  - hyperepoch0:
+      Epochs:
+      - epoch0:
+          Period: 100ms
+  Clients:
+  - clientGpuY:
+      Resources:
+        CUDA_STREAM:
+        - CUDA_STREAMY: iGPU
+      Epochs:
+      - hyperepoch0.epoch0:
+          Runnables:
+          - test2:
+              WCET: 10ms
+              StartTime: 0
+              Dependencies:
+              - clientGpuY.submit
+              Resources:
+              - CPU1
+          - submit:
+              WCET: 10ms
+              Dependencies: []
+              Submits: clientGpuY.kernel
+              Resources:
+              - CPU1
+              - CUDA_STREAM
+          - kernel:
+              WCET: 1ms
+              Dependencies:
+              - clientGpuX.kernel
+              Resources:
+              - iGPU
+  - clientGpuX:
+      Resources:
+        CUDA_STREAM:
+        - CUDA_STREAMX: iGPU
+      Epochs:
+      - hyperepoch0.epoch0:
+          Runnables:
+          - submit:
+              WCET: 10ms
+              Dependencies: []
+              Submits: clientGpuX.kernel
+              Resources:
+              - CPU1
+              - CUDA_STREAM
+          - kernel:
+              WCET: 1ms
+              Dependencies:
+              - clientGpuY.test2
+              Resources:
+              - iGPU
+  - FrameSync:
+    - hyperepoch0.epoch0:
+        Resources: ['CPU1']
+
+...

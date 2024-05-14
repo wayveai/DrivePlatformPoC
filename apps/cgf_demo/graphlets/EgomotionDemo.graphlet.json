@@ -1,0 +1,150 @@
+{
+    "name": "EgomotionDemo",
+    "inputPorts": {
+        "IMU_FRAME": {
+            "type": "dwIMUFrame"
+        },
+        "VEHICLE_IO_SAFETY_STATE": {
+            "type": "dwVehicleIOSafetyState"
+        },
+        "VEHICLE_IO_NON_SAFETY_STATE": {
+            "type": "dwVehicleIONonSafetyState"
+        },
+        "VEHICLE_IO_ACTUATION_FEEDBACK": {
+            "type": "dwVehicleIOActuationFeedback"
+        },
+        "WHEEL_RADII": {
+            "type": "dwCalibratedWheelRadii"
+        },
+        "IMU_EXTRINSICS": {
+            "type": "dwSensorNodeProperties"
+        }
+    },
+    "outputPorts": {
+        "EGOMOTION_STATE": {
+            "type": "dwEgomotionStateHandle_t"
+        },
+        "ODOMETRY_ONLY_EGOMOTION_STATE": {
+            "type": "dwEgomotionStateHandle_t"
+        }
+    },
+    "parameters": {
+        "enableSuspension": {
+            "type": "bool",
+            "default": true
+        },
+        "speedMeasurementType": {
+            "type": "dwEgomotionSpeedMeasurementType",
+            "default": "DW_EGOMOTION_REAR_WHEEL_SPEED"
+        },
+        "motionModel": {
+            "type": "dwMotionModel",
+            "default": "DW_EGOMOTION_IMU_ODOMETRY"
+        },
+        "estimateInitialOrientation": {
+            "type": "bool",
+            "default": false
+        },
+        "automaticUpdate": {
+            "type": "bool",
+            "default": true
+        },
+        "historySize": {
+            "type": "uint32_t",
+            "default": 1000
+        },
+        "linearAccelerationFilterMode": {
+            "type": "dwEgomotionLinearAccelerationFilterMode",
+            "default": "DW_EGOMOTION_ACC_FILTER_SIMPLE"
+        },
+        "linearAccelerationFilterTimeConst": {
+            "type": "float32_t",
+            "default": 0.1
+        },
+        "linearAccelerationFilterProcessNoiseStdevSpeed": {
+            "type": "float32_t",
+            "default": 0.1
+        },
+        "linearAccelerationFilterProcessNoiseStdevAcceleration": {
+            "type": "float32_t",
+            "default": 1
+        },
+        "linearAccelerationFilterMeasurementNoiseStdevSpeed": {
+            "type": "float32_t",
+            "default": 0.1
+        },
+        "linearAccelerationFilterMeasurementNoiseStdevAcceleration": {
+            "type": "float32_t",
+            "default": 0.384
+        }
+    },
+    "subcomponents": {
+        "odometryOnlyEgomotionNode": {
+            "componentType": "../../../src/dwframework/dwnodes/egomotion/dwrelativeegomotionimunode/dwRelativeEgomotionIMUNode.node.json",
+            "parameters": {
+                "*": "$*",
+                "historySize": 100,
+                "motionModel": "DW_EGOMOTION_ODOMETRY"
+            }
+        },
+        "relativeEgomotionNode": {
+            "componentType": "../../../src/dwframework/dwnodes/egomotion/dwrelativeegomotionimunode/dwRelativeEgomotionIMUNode.node.json",
+            "parameters": {
+                "*": "$*"
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": "IMU_EXTRINSICS",
+            "dests": {
+                "relativeEgomotionNode.IMU_EXTRINSICS": {}
+            }
+        },
+        {
+            "src": "IMU_FRAME",
+            "dests": {
+                "relativeEgomotionNode.IMU_FRAME": {}
+            }
+        },
+        {
+            "src": "VEHICLE_IO_ACTUATION_FEEDBACK",
+            "dests": {
+                "odometryOnlyEgomotionNode.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "relativeEgomotionNode.VEHICLE_IO_ACTUATION_FEEDBACK": {}
+            }
+        },
+        {
+            "src": "VEHICLE_IO_NON_SAFETY_STATE",
+            "dests": {
+                "odometryOnlyEgomotionNode.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "relativeEgomotionNode.VEHICLE_IO_NON_SAFETY_STATE": {}
+            }
+        },
+        {
+            "src": "VEHICLE_IO_SAFETY_STATE",
+            "dests": {
+                "odometryOnlyEgomotionNode.VEHICLE_IO_SAFETY_STATE": {},
+                "relativeEgomotionNode.VEHICLE_IO_SAFETY_STATE": {}
+            }
+        },
+        {
+            "src": "WHEEL_RADII",
+            "dests": {
+                "relativeEgomotionNode.WHEEL_RADII": {}
+            }
+        },
+        {
+            "src": "odometryOnlyEgomotionNode.EGOMOTION_STATE",
+            "dests": {
+                "ODOMETRY_ONLY_EGOMOTION_STATE": {}
+            }
+        },
+        {
+            "src": "relativeEgomotionNode.EGOMOTION_STATE",
+            "dests": {
+                "EGOMOTION_STATE": {}
+            }
+        }
+    ]
+}

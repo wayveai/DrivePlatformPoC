@@ -1,0 +1,273 @@
+{
+    "name": "RadarDopplerMotion",
+    "inputPorts": {
+        "RADAR_SCAN": {
+            "type": "dwRadarScan",
+            "array": 9
+        },
+        "VEHICLE_IO_SAFETY_STATE": {
+            "type": "dwVehicleIOSafetyState"
+        },
+        "VEHICLE_IO_NON_SAFETY_STATE": {
+            "type": "dwVehicleIONonSafetyState"
+        },
+        "VEHICLE_IO_ACTUATION_FEEDBACK": {
+            "type": "dwVehicleIOActuationFeedback"
+        }
+    },
+    "outputPorts": {
+        "RADAR_DOPPLER_MOTION": {
+            "type": "dwRadarDopplerMotion",
+            "array": 9
+        }
+    },
+    "parameters": {
+        "radarDopplerMotionCudaStreamIndices": {
+            "type": "size_t",
+            "array": 9,
+            "default": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        "enabled": {
+            "type": "bool",
+            "array": 9,
+            "default": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false
+            ]
+        }
+    },
+    "subcomponents": {
+        "radarDopplerMotionNode0": {
+            "componentType": "../../../src/dwframework/dwnodes/dwradardopplermotionnode/dwRadarDopplerMotionNode.node.json",
+            "parameters": {
+                "*": "$*",
+                "index": 0
+            }
+        },
+        "radarDopplerMotionNode1": {
+            "componentType": "../../../src/dwframework/dwnodes/dwradardopplermotionnode/dwRadarDopplerMotionNode.node.json",
+            "parameters": {
+                "*": "$*",
+                "index": 1
+            }
+        },
+        "radarDopplerMotionNode2": {
+            "componentType": "../../../src/dwframework/dwnodes/dwradardopplermotionnode/dwRadarDopplerMotionNode.node.json",
+            "parameters": {
+                "*": "$*",
+                "index": 2
+            }
+        },
+        "radarDopplerMotionNode3": {
+            "componentType": "../../../src/dwframework/dwnodes/dwradardopplermotionnode/dwRadarDopplerMotionNode.node.json",
+            "parameters": {
+                "*": "$*",
+                "index": 3
+            }
+        },
+        "radarDopplerMotionNode4": {
+            "componentType": "../../../src/dwframework/dwnodes/dwradardopplermotionnode/dwRadarDopplerMotionNode.node.json",
+            "parameters": {
+                "*": "$*",
+                "index": 4
+            }
+        },
+        "radarDopplerMotionNode5": {
+            "componentType": "../../../src/dwframework/dwnodes/dwradardopplermotionnode/dwRadarDopplerMotionNode.node.json",
+            "parameters": {
+                "*": "$*",
+                "index": 5
+            }
+        },
+        "radarDopplerMotionNode6": {
+            "componentType": "../../../src/dwframework/dwnodes/dwradardopplermotionnode/dwRadarDopplerMotionNode.node.json",
+            "parameters": {
+                "*": "$*",
+                "index": 6
+            }
+        },
+        "radarDopplerMotionNode7": {
+            "componentType": "../../../src/dwframework/dwnodes/dwradardopplermotionnode/dwRadarDopplerMotionNode.node.json",
+            "parameters": {
+                "*": "$*",
+                "index": 7
+            }
+        },
+        "radarDopplerMotionNode8": {
+            "componentType": "../../../src/dwframework/dwnodes/dwradardopplermotionnode/dwRadarDopplerMotionNode.node.json",
+            "parameters": {
+                "*": "$*",
+                "index": 8
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": "RADAR_SCAN[0]",
+            "dests": {
+                "radarDopplerMotionNode0.RADAR_SCAN": {}
+            }
+        },
+        {
+            "src": "RADAR_SCAN[1]",
+            "dests": {
+                "radarDopplerMotionNode1.RADAR_SCAN": {}
+            }
+        },
+        {
+            "src": "RADAR_SCAN[2]",
+            "dests": {
+                "radarDopplerMotionNode2.RADAR_SCAN": {}
+            }
+        },
+        {
+            "src": "RADAR_SCAN[3]",
+            "dests": {
+                "radarDopplerMotionNode3.RADAR_SCAN": {}
+            }
+        },
+        {
+            "src": "RADAR_SCAN[4]",
+            "dests": {
+                "radarDopplerMotionNode4.RADAR_SCAN": {}
+            }
+        },
+        {
+            "src": "RADAR_SCAN[5]",
+            "dests": {
+                "radarDopplerMotionNode5.RADAR_SCAN": {}
+            }
+        },
+        {
+            "src": "RADAR_SCAN[6]",
+            "dests": {
+                "radarDopplerMotionNode6.RADAR_SCAN": {}
+            }
+        },
+        {
+            "src": "RADAR_SCAN[7]",
+            "dests": {
+                "radarDopplerMotionNode7.RADAR_SCAN": {}
+            }
+        },
+        {
+            "src": "RADAR_SCAN[8]",
+            "dests": {
+                "radarDopplerMotionNode8.RADAR_SCAN": {}
+            }
+        },
+        {
+            "src": "VEHICLE_IO_ACTUATION_FEEDBACK",
+            "dests": {
+                "radarDopplerMotionNode0.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "radarDopplerMotionNode1.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "radarDopplerMotionNode2.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "radarDopplerMotionNode3.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "radarDopplerMotionNode4.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "radarDopplerMotionNode5.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "radarDopplerMotionNode6.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "radarDopplerMotionNode7.VEHICLE_IO_ACTUATION_FEEDBACK": {},
+                "radarDopplerMotionNode8.VEHICLE_IO_ACTUATION_FEEDBACK": {}
+            }
+        },
+        {
+            "src": "VEHICLE_IO_NON_SAFETY_STATE",
+            "dests": {
+                "radarDopplerMotionNode0.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "radarDopplerMotionNode1.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "radarDopplerMotionNode2.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "radarDopplerMotionNode3.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "radarDopplerMotionNode4.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "radarDopplerMotionNode5.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "radarDopplerMotionNode6.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "radarDopplerMotionNode7.VEHICLE_IO_NON_SAFETY_STATE": {},
+                "radarDopplerMotionNode8.VEHICLE_IO_NON_SAFETY_STATE": {}
+            }
+        },
+        {
+            "src": "VEHICLE_IO_SAFETY_STATE",
+            "dests": {
+                "radarDopplerMotionNode0.VEHICLE_IO_SAFETY_STATE": {},
+                "radarDopplerMotionNode1.VEHICLE_IO_SAFETY_STATE": {},
+                "radarDopplerMotionNode2.VEHICLE_IO_SAFETY_STATE": {},
+                "radarDopplerMotionNode3.VEHICLE_IO_SAFETY_STATE": {},
+                "radarDopplerMotionNode4.VEHICLE_IO_SAFETY_STATE": {},
+                "radarDopplerMotionNode5.VEHICLE_IO_SAFETY_STATE": {},
+                "radarDopplerMotionNode6.VEHICLE_IO_SAFETY_STATE": {},
+                "radarDopplerMotionNode7.VEHICLE_IO_SAFETY_STATE": {},
+                "radarDopplerMotionNode8.VEHICLE_IO_SAFETY_STATE": {}
+            }
+        },
+        {
+            "src": "radarDopplerMotionNode0.RADAR_DOPPLER_MOTION",
+            "dests": {
+                "RADAR_DOPPLER_MOTION[0]": {}
+            }
+        },
+        {
+            "src": "radarDopplerMotionNode1.RADAR_DOPPLER_MOTION",
+            "dests": {
+                "RADAR_DOPPLER_MOTION[1]": {}
+            }
+        },
+        {
+            "src": "radarDopplerMotionNode2.RADAR_DOPPLER_MOTION",
+            "dests": {
+                "RADAR_DOPPLER_MOTION[2]": {}
+            }
+        },
+        {
+            "src": "radarDopplerMotionNode3.RADAR_DOPPLER_MOTION",
+            "dests": {
+                "RADAR_DOPPLER_MOTION[3]": {}
+            }
+        },
+        {
+            "src": "radarDopplerMotionNode4.RADAR_DOPPLER_MOTION",
+            "dests": {
+                "RADAR_DOPPLER_MOTION[4]": {}
+            }
+        },
+        {
+            "src": "radarDopplerMotionNode5.RADAR_DOPPLER_MOTION",
+            "dests": {
+                "RADAR_DOPPLER_MOTION[5]": {}
+            }
+        },
+        {
+            "src": "radarDopplerMotionNode6.RADAR_DOPPLER_MOTION",
+            "dests": {
+                "RADAR_DOPPLER_MOTION[6]": {}
+            }
+        },
+        {
+            "src": "radarDopplerMotionNode7.RADAR_DOPPLER_MOTION",
+            "dests": {
+                "RADAR_DOPPLER_MOTION[7]": {}
+            }
+        },
+        {
+            "src": "radarDopplerMotionNode8.RADAR_DOPPLER_MOTION",
+            "dests": {
+                "RADAR_DOPPLER_MOTION[8]": {}
+            }
+        }
+    ]
+}

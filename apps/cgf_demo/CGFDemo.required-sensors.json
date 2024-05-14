@@ -1,0 +1,96 @@
+{
+    "camera:front:wide:120fov": {
+        "typeIndex": 0,
+        "connectedTo": [
+            "machine0"
+        ]
+    },
+    "synthesizedCameraFC60": {
+        "typeIndex": 1,
+        "connectedTo": [
+            "machine0"
+        ]
+    },
+    "camera:front:tele:30fov": {
+        "typeIndex": 2,
+        "connectedTo": [
+            "machine0"
+        ]
+    },
+    "camera:rear:left:70fov": {
+        "typeIndex": 3,
+        "connectedTo": [
+            "machine0"
+        ]
+    },
+    "camera:rear:right:70fov": {
+        "typeIndex": 4,
+        "connectedTo": [
+            "machine0"
+        ]
+    },
+    "camera:left:fisheye:200fov": {
+        "typeIndex": 5,
+        "connectedTo": [
+            "machine0"
+        ]
+    },
+    "camera:right:fisheye:200fov": {
+        "typeIndex": 6,
+        "connectedTo": [
+            "machine0"
+        ]
+    },
+    "camera:front:fisheye:200fov": {
+        "typeIndex": 7,
+        "connectedTo": [
+            "machine0"
+        ]
+    },
+    "camera:rear:fisheye:200fov": {
+        "typeIndex": 8,
+        "connectedTo": [
+            "machine0"
+        ]
+    },
+    "radar:front:center": {
+        "typeIndex": 0,
+        "connectedTo": [
+            "machine0"
+        ]
+    },
+    "radar:corner:front:left": {
+        "typeIndex": 1,
+        "connectedTo": [
+            "machine0"
+        ]
+    },
+    "radar:corner:front:right": {
+        "typeIndex": 2,
+        "connectedTo": [
+            "machine0"
+        ]
+    },
+    "radar:corner:rear:left": {
+        "typeIndex": 3,
+        "connectedTo": [
+            "machine0"
+        ]
+    },
+    "radar:corner:rear:right": {
+        "typeIndex": 4,
+        "connectedTo": [
+            "machine0"
+        ]
+    },
+    "vehicleSensor0": {
+        "connectedTo": [
+            "machine0"
+        ]
+    },
+    "imu0": {
+        "connectedTo": [
+            "machine0"
+        ]
+    }
+}

@@ -1,0 +1,155 @@
+{
+    "name": "CameraSensor",
+    "inputPorts": {
+        "VIRTUAL_SYNC_TIME": {
+            "type": "dwTime_t"
+        },
+        "SENSOR_EXTRINSICS": {
+            "type": "dwCalibratedExtrinsics"
+        }
+    },
+    "outputPorts": {
+        "SENSOR_PROPERTIES": {
+            "type": "dwSensorNodeProperties"
+        },
+        "INTRINSICS": {
+            "type": "dwCameraIntrinsics"
+        },
+        "CUDA_PROCESSED": {
+            "type": "dwImageHandle_t"
+        },
+        "CUDA_PROCESSED_RGBA": {
+            "type": "dwImageHandle_t"
+        },
+        "CUDA_ISP_YUV_UINT_8_HALF_RES": {
+            "type": "dwImageHandle_t"
+        },
+        "CUDA_ISP_YUV_UINT_8_TWO_MP_RES": {
+            "type": "dwImageHandle_t"
+        },
+        "IMAGE_TIMESTAMP": {
+            "type": "dwTime_t"
+        },
+        "NEXT_IMAGE_TIMESTAMP": {
+            "type": "dwTime_t"
+        },
+        "IMAGE_TIMESTAMP_AND_ID": {
+            "type": "dwSensorTsAndID"
+        }
+    },
+    "parameters": {
+        "cameraIndex": {
+            "type": "size_t",
+            "default": 0
+        },
+        "delayPostInit": {
+            "type": "int32_t",
+            "default": 0
+        },
+        "enable2MpOutput": {
+            "type": "bool",
+            "default": false
+        },
+        "streamIndex": {
+            "type": "size_t",
+            "default": 0
+        },
+        "useEEPROMIntrinsics": {
+            "type": "bool",
+            "default": false
+        },
+        "frameSkipMask": {
+            "type": "dw::core::FixedString<32>",
+            "default": ""
+        }
+    },
+    "subcomponents": {
+        "cameraNode": {
+            "componentType": "../../../src/dwframework/dwnodes/sensors/dwcameranode/dwCameraNode.node.json",
+            "parameters": {
+                "cameraIndex": "$cameraIndex",
+                "frameSkipMask": "$frameSkipMask",
+                "streamIndex": "$streamIndex",
+                "useEEPROMIntrinsics": "$useEEPROMIntrinsics"
+            }
+        },
+        "ispNode": {
+            "componentType": "../nodes/ISPNode.node.json",
+            "parameters": {
+                "*": "$*"
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": "SENSOR_EXTRINSICS",
+            "dests": {
+                "cameraNode.SENSOR_EXTRINSICS": {}
+            }
+        },
+        {
+            "src": "VIRTUAL_SYNC_TIME",
+            "dests": {
+                "cameraNode.VIRTUAL_SYNC_TIME": {}
+            }
+        },
+        {
+            "src": "cameraNode.IMAGE_NATIVE_PROCESSED",
+            "dests": {
+                "CUDA_PROCESSED": {},
+                "ispNode.IMAGE": {}
+            },
+            "params": {
+                "singleton": true
+            }
+        },
+        {
+            "src": "cameraNode.IMAGE_PROCESSED_RGBA",
+            "dests": {
+                "CUDA_PROCESSED_RGBA": {}
+            }
+        },
+        {
+            "src": "cameraNode.IMAGE_TIMESTAMP",
+            "dests": {
+                "IMAGE_TIMESTAMP": {}
+            }
+        },
+        {
+            "src": "cameraNode.IMAGE_TIMESTAMP_AND_ID",
+            "dests": {
+                "IMAGE_TIMESTAMP_AND_ID": {}
+            }
+        },
+        {
+            "src": "cameraNode.INTRINSICS",
+            "dests": {
+                "INTRINSICS": {}
+            }
+        },
+        {
+            "src": "cameraNode.NEXT_IMAGE_TIMESTAMP",
+            "dests": {
+                "NEXT_IMAGE_TIMESTAMP": {}
+            }
+        },
+        {
+            "src": "cameraNode.SENSOR_PROPERTIES",
+            "dests": {
+                "SENSOR_PROPERTIES": {}
+            }
+        },
+        {
+            "src": "ispNode.IMAGE_YUV",
+            "dests": {
+                "CUDA_ISP_YUV_UINT_8_HALF_RES": {}
+            }
+        },
+        {
+            "src": "ispNode.IMAGE_YUV_2MP",
+            "dests": {
+                "CUDA_ISP_YUV_UINT_8_TWO_MP_RES": {}
+            }
+        }
+    ]
+}

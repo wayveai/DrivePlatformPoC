@@ -1,0 +1,188 @@
+{
+    "name": "CameraSensor_derived_0",
+    "inputPorts": {
+        "VIRTUAL_SYNC_TIME": {
+            "type": "dwTime_t"
+        },
+        "SENSOR_EXTRINSICS": {
+            "type": "dwCalibratedExtrinsics"
+        }
+    },
+    "outputPorts": {
+        "SENSOR_PROPERTIES": {
+            "type": "dwSensorNodeProperties"
+        },
+        "INTRINSICS": {
+            "type": "dwCameraIntrinsics"
+        },
+        "CUDA_PROCESSED": {
+            "type": "dwImageHandle_t"
+        },
+        "CUDA_PROCESSED_RGBA": {
+            "type": "dwImageHandle_t"
+        },
+        "IMAGE_TIMESTAMP": {
+            "type": "dwTime_t"
+        },
+        "NEXT_IMAGE_TIMESTAMP": {
+            "type": "dwTime_t"
+        },
+        "IMAGE_TIMESTAMP_AND_ID": {
+            "type": "dwSensorTsAndID"
+        },
+        "CUDA_ISP_YUV_UINT_8_HALF_RES": {
+            "type": "dwImageHandle_t",
+            "array": 2
+        },
+        "CUDA_ISP_YUV_UINT_8_TWO_MP_RES": {
+            "type": "dwImageHandle_t",
+            "array": 2
+        }
+    },
+    "parameters": {
+        "delayPostInit": {
+            "type": "int32_t",
+            "default": 0
+        },
+        "streamIndex": {
+            "type": "size_t",
+            "default": 0
+        },
+        "useEEPROMIntrinsics": {
+            "type": "bool",
+            "default": false
+        },
+        "frameSkipMask": {
+            "type": "dw::core::FixedString<32>",
+            "default": ""
+        },
+        "cameraIndex_1": {
+            "type": "size_t",
+            "default": 0
+        },
+        "cameraIndex_2": {
+            "type": "size_t",
+            "default": 1
+        },
+        "enable2MpOutput_1": {
+            "type": "bool",
+            "default": false
+        },
+        "enable2MpOutput_2": {
+            "type": "bool",
+            "default": false
+        }
+    },
+    "subcomponents": {
+        "cameraNode": {
+            "componentType": "../../../src/dwframework/dwnodes/sensors/dwcameranode/dwCameraNode.node.json",
+            "parameters": {
+                "frameSkipMask": "$frameSkipMask",
+                "streamIndex": "$streamIndex",
+                "useEEPROMIntrinsics": "$useEEPROMIntrinsics",
+                "cameraIndex": "$cameraIndex_1"
+            }
+        },
+        "ispNode1": {
+            "componentType": "../nodes/ISPNode.node.json",
+            "parameters": {
+                "streamIndex": "$streamIndex",
+                "cameraIndex": "$cameraIndex_1",
+                "enable2MpOutput": "$enable2MpOutput_1"
+            }
+        },
+        "ispNode2": {
+            "componentType": "../nodes/ISPNode.node.json",
+            "parameters": {
+                "streamIndex": "$streamIndex",
+                "cameraIndex": "$cameraIndex_2",
+                "enable2MpOutput": "$enable2MpOutput_2"
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": "SENSOR_EXTRINSICS",
+            "dests": {
+                "cameraNode.SENSOR_EXTRINSICS": {}
+            }
+        },
+        {
+            "src": "VIRTUAL_SYNC_TIME",
+            "dests": {
+                "cameraNode.VIRTUAL_SYNC_TIME": {}
+            }
+        },
+        {
+            "src": "cameraNode.IMAGE_NATIVE_PROCESSED",
+            "dests": {
+                "CUDA_PROCESSED": {},
+                "ispNode1.IMAGE": {},
+                "ispNode2.IMAGE": {}
+            },
+            "params": {
+                "singleton": true
+            }
+        },
+        {
+            "src": "cameraNode.IMAGE_PROCESSED_RGBA",
+            "dests": {
+                "CUDA_PROCESSED_RGBA": {}
+            }
+        },
+        {
+            "src": "cameraNode.IMAGE_TIMESTAMP",
+            "dests": {
+                "IMAGE_TIMESTAMP": {}
+            }
+        },
+        {
+            "src": "cameraNode.IMAGE_TIMESTAMP_AND_ID",
+            "dests": {
+                "IMAGE_TIMESTAMP_AND_ID": {}
+            }
+        },
+        {
+            "src": "cameraNode.INTRINSICS",
+            "dests": {
+                "INTRINSICS": {}
+            }
+        },
+        {
+            "src": "cameraNode.NEXT_IMAGE_TIMESTAMP",
+            "dests": {
+                "NEXT_IMAGE_TIMESTAMP": {}
+            }
+        },
+        {
+            "src": "cameraNode.SENSOR_PROPERTIES",
+            "dests": {
+                "SENSOR_PROPERTIES": {}
+            }
+        },
+        {
+            "src": "ispNode1.IMAGE_YUV",
+            "dests": {
+                "CUDA_ISP_YUV_UINT_8_HALF_RES[0]": {}
+            }
+        },
+        {
+            "src": "ispNode1.IMAGE_YUV_2MP",
+            "dests": {
+                "CUDA_ISP_YUV_UINT_8_TWO_MP_RES[0]": {}
+            }
+        },
+        {
+            "src": "ispNode2.IMAGE_YUV",
+            "dests": {
+                "CUDA_ISP_YUV_UINT_8_HALF_RES[1]": {}
+            }
+        },
+        {
+            "src": "ispNode2.IMAGE_YUV_2MP",
+            "dests": {
+                "CUDA_ISP_YUV_UINT_8_TWO_MP_RES[1]": {}
+            }
+        }
+    ]
+}

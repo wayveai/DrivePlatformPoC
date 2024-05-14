@@ -1,0 +1,33 @@
+---
+Version: 3.0.0
+cpu_simple:
+  Identifier: 10
+  Resources:
+    CPU:
+    - CPU0
+    - CPU1
+  Hyperepochs:
+  - hyperepoch0:
+      Monitor: 150ms
+      Epochs:
+      - epoch0:
+          Period: 100ms
+  Clients:
+  - client:
+      Epochs:
+      - hyperepoch0.epoch0:
+          Runnables:
+          - test1:
+              WCET: 10ms
+              StartTime: 0
+              Dependencies: []
+              Resources:
+              - CPU
+          - test2:
+              WCET: 10ms
+              StartTime: 0
+              Dependencies:
+              - client.test1
+              Resources:
+              - CPU
+...

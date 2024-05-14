@@ -1,0 +1,92 @@
+{
+    "name": "VehicleStateConsumer",
+    "inputPorts": {
+        "VIRTUAL_SYNC_TIME": {
+            "type": "dwTime_t"
+        }
+    },
+    "outputPorts": {
+        "VEHICLE_IO_STATE": {
+            "type": "dwVehicleIOState"
+        },
+        "NEXT_TIMESTAMP": {
+            "type": "dwTime_t"
+        },
+        "VEHICLE_IO_SAFETY_STATE": {
+            "type": "dwVehicleIOSafetyState"
+        },
+        "VEHICLE_IO_NON_SAFETY_STATE": {
+            "type": "dwVehicleIONonSafetyState"
+        },
+        "VEHICLE_IO_ACTUATION_FEEDBACK": {
+            "type": "dwVehicleIOActuationFeedback"
+        }
+    },
+    "parameters": {
+        "sensorAffinityMask": {
+            "type": "int32_t",
+            "default": 1
+        },
+        "sensorThreadPriority": {
+            "type": "int32_t",
+            "default": 99
+        },
+        "frameSkipMask": {
+            "type": "dw::core::FixedString<32>",
+            "default": ""
+        }
+    },
+    "subcomponents": {
+        "vehicleStateNode": {
+            "componentType": "../../../src/dwframework/dwnodes/sensors/dwvehiclestatenode/dwVehicleStateNode.node.json",
+            "parameters": {
+                "*": "$*",
+                "external": false,
+                "frameSkipMask": "$frameSkipMask",
+                "legacyExternal": false,
+                "legacyInternal": true,
+                "externalChannel": false,
+                "externalAQ": false,
+                "vioStateRcEnabled": false
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": "VIRTUAL_SYNC_TIME",
+            "dests": {
+                "vehicleStateNode.VIRTUAL_SYNC_TIME": {}
+            }
+        },
+        {
+            "src": "vehicleStateNode.NEXT_TIMESTAMP",
+            "dests": {
+                "NEXT_TIMESTAMP": {}
+            }
+        },
+        {
+            "src": "vehicleStateNode.PROCESSED_DATA",
+            "dests": {
+                "VEHICLE_IO_STATE": {}
+            }
+        },
+        {
+            "src": "vehicleStateNode.VEHICLE_IO_ACTUATION_FEEDBACK_OUT",
+            "dests": {
+                "VEHICLE_IO_ACTUATION_FEEDBACK": {}
+            }
+        },
+        {
+            "src": "vehicleStateNode.VEHICLE_IO_NON_SAFETY_STATE_OUT",
+            "dests": {
+                "VEHICLE_IO_NON_SAFETY_STATE": {}
+            }
+        },
+        {
+            "src": "vehicleStateNode.VEHICLE_IO_SAFETY_STATE_OUT",
+            "dests": {
+                "VEHICLE_IO_SAFETY_STATE": {}
+            }
+        }
+    ]
+}

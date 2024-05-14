@@ -1,0 +1,781 @@
+{
+    "name": "CGFDemoApp",
+    "logSpec": "file/rfc5424:{{logpath}}/{{appname}}.log",
+    "parameters": {
+        "instanceIDs": {
+            "type": "string",
+            "default": "./CGFDemoInstanceIDs.json"
+        },
+        "imageWidth0": {
+            "type": "string",
+            "default": "962"
+        },
+        "imageHeight0": {
+            "type": "string",
+            "default": "542"
+        },
+        "imageFov0": {
+            "type": "string",
+            "default": "ISP_120FOV"
+        },
+        "imageWidth1": {
+            "type": "string",
+            "default": "960"
+        },
+        "imageHeight1": {
+            "type": "string",
+            "default": "604"
+        },
+        "imageFov1": {
+            "type": "string",
+            "default": "ISP_60FOV"
+        },
+        "imageWidth2": {
+            "type": "string",
+            "default": "960"
+        },
+        "imageHeight2": {
+            "type": "string",
+            "default": "604"
+        },
+        "imageFov2": {
+            "type": "string",
+            "default": "ISP_30FOV"
+        },
+        "imageWidth3": {
+            "type": "string",
+            "default": "960"
+        },
+        "imageHeight3": {
+            "type": "string",
+            "default": "604"
+        },
+        "imageFov3": {
+            "type": "string",
+            "default": "ISP_70FOV"
+        },
+        "imageSizeMode0": {
+            "type": "string",
+            "default": "FIXED"
+        },
+        "imageRoiMode0": {
+            "type": "string",
+            "default": "BOTTOM"
+        },
+        "image2MpSizeMode0": {
+            "type": "string",
+            "default": "SCALED"
+        },
+        "image2MpDownscaleFactor0": {
+            "type": "string",
+            "default": "2"
+        },
+        "imageSizeMode1": {
+            "type": "string",
+            "default": "FIXED"
+        },
+        "imageRoiMode1": {
+            "type": "string",
+            "default": "BOTTOM"
+        },
+        "image2MpSizeMode1": {
+            "type": "string",
+            "default": "SCALED"
+        },
+        "image2MpDownscaleFactor1": {
+            "type": "string",
+            "default": "2"
+        },
+        "imageSizeMode2": {
+            "type": "string",
+            "default": "FIXED"
+        },
+        "imageRoiMode2": {
+            "type": "string",
+            "default": "BOTTOM"
+        },
+        "image2MpSizeMode2": {
+            "type": "string",
+            "default": "SCALED"
+        },
+        "image2MpDownscaleFactor2": {
+            "type": "string",
+            "default": "2"
+        },
+        "imageSizeMode3": {
+            "type": "string",
+            "default": "FIXED"
+        },
+        "imageRoiMode3": {
+            "type": "string",
+            "default": "BOTTOM"
+        },
+        "image2MpSizeMode3": {
+            "type": "string",
+            "default": "SCALED"
+        },
+        "image2MpDownscaleFactor3": {
+            "type": "string",
+            "default": "2"
+        },
+        "imageWidth4": {
+            "type": "string",
+            "default": "960"
+        },
+        "imageHeight4": {
+            "type": "string",
+            "default": "604"
+        },
+        "imageSizeMode4": {
+            "type": "string",
+            "default": "FIXED"
+        },
+        "imageRoiMode4": {
+            "type": "string",
+            "default": "BOTTOM"
+        },
+        "image2MpSizeMode4": {
+            "type": "string",
+            "default": "SCALED"
+        },
+        "image2MpDownscaleFactor4": {
+            "type": "string",
+            "default": "2"
+        },
+        "imageFov4": {
+            "type": "string",
+            "default": "ISP_70FOV"
+        },
+        "imageWidth5": {
+            "type": "string",
+            "default": "960"
+        },
+        "imageHeight5": {
+            "type": "string",
+            "default": "608"
+        },
+        "imageSizeMode5": {
+            "type": "string",
+            "default": "FIXED"
+        },
+        "imageRoiMode5": {
+            "type": "string",
+            "default": "MIDDLE"
+        },
+        "image2MpSizeMode5": {
+            "type": "string",
+            "default": "SCALED"
+        },
+        "image2MpDownscaleFactor5": {
+            "type": "string",
+            "default": "1"
+        },
+        "imageFov5": {
+            "type": "string",
+            "default": "ISP_200FOV"
+        },
+        "imageWidth6": {
+            "type": "string",
+            "default": "960"
+        },
+        "imageHeight6": {
+            "type": "string",
+            "default": "608"
+        },
+        "imageSizeMode6": {
+            "type": "string",
+            "default": "FIXED"
+        },
+        "imageRoiMode6": {
+            "type": "string",
+            "default": "MIDDLE"
+        },
+        "image2MpSizeMode6": {
+            "type": "string",
+            "default": "SCALED"
+        },
+        "image2MpDownscaleFactor6": {
+            "type": "string",
+            "default": "1"
+        },
+        "imageFov6": {
+            "type": "string",
+            "default": "ISP_200FOV"
+        },
+        "imageWidth7": {
+            "type": "string",
+            "default": "960"
+        },
+        "imageHeight7": {
+            "type": "string",
+            "default": "608"
+        },
+        "imageSizeMode7": {
+            "type": "string",
+            "default": "FIXED"
+        },
+        "imageRoiMode7": {
+            "type": "string",
+            "default": "MIDDLE"
+        },
+        "image2MpSizeMode7": {
+            "type": "string",
+            "default": "SCALED"
+        },
+        "image2MpDownscaleFactor7": {
+            "type": "string",
+            "default": "1"
+        },
+        "imageFov7": {
+            "type": "string",
+            "default": "ISP_200FOV"
+        },
+        "imageWidth8": {
+            "type": "string",
+            "default": "960"
+        },
+        "imageHeight8": {
+            "type": "string",
+            "default": "608"
+        },
+        "imageSizeMode8": {
+            "type": "string",
+            "default": "FIXED"
+        },
+        "imageRoiMode8": {
+            "type": "string",
+            "default": "MIDDLE"
+        },
+        "image2MpSizeMode8": {
+            "type": "string",
+            "default": "SCALED"
+        },
+        "image2MpDownscaleFactor8": {
+            "type": "string",
+            "default": "1"
+        },
+        "imageFov8": {
+            "type": "string",
+            "default": "ISP_200FOV"
+        },
+        "imageWidth9": {
+            "type": "string",
+            "default": "960"
+        },
+        "imageHeight9": {
+            "type": "string",
+            "default": "604"
+        },
+        "imageSizeMode9": {
+            "type": "string",
+            "default": "FIXED"
+        },
+        "imageRoiMode9": {
+            "type": "string",
+            "default": "BOTTOM"
+        },
+        "image2MpSizeMode9": {
+            "type": "string",
+            "default": "SCALED"
+        },
+        "image2MpDownscaleFactor9": {
+            "type": "string",
+            "default": "2"
+        },
+        "imageFov9": {
+            "type": "string",
+            "default": "ISP_120FOV"
+        },
+        "imageWidth10": {
+            "type": "string",
+            "default": "960"
+        },
+        "imageHeight10": {
+            "type": "string",
+            "default": "604"
+        },
+        "imageSizeMode10": {
+            "type": "string",
+            "default": "FIXED"
+        },
+        "imageRoiMode10": {
+            "type": "string",
+            "default": "BOTTOM"
+        },
+        "image2MpSizeMode10": {
+            "type": "string",
+            "default": "SCALED"
+        },
+        "image2MpDownscaleFactor10": {
+            "type": "string",
+            "default": "2"
+        },
+        "imageFov10": {
+            "type": "string",
+            "default": "ISP_120FOV"
+        },
+        "imageWidth11": {
+            "type": "string",
+            "default": "960"
+        },
+        "imageHeight11": {
+            "type": "string",
+            "default": "604"
+        },
+        "imageSizeMode11": {
+            "type": "string",
+            "default": "FIXED"
+        },
+        "imageRoiMode11": {
+            "type": "string",
+            "default": "BOTTOM"
+        },
+        "image2MpSizeMode11": {
+            "type": "string",
+            "default": "SCALED"
+        },
+        "image2MpDownscaleFactor11": {
+            "type": "string",
+            "default": "2"
+        },
+        "imageFov11": {
+            "type": "string",
+            "default": "ISP_30FOV"
+        },
+        "imageWidth12": {
+            "type": "string",
+            "default": "960"
+        },
+        "imageHeight12": {
+            "type": "string",
+            "default": "604"
+        },
+        "imageSizeMode12": {
+            "type": "string",
+            "default": "FIXED"
+        },
+        "imageRoiMode12": {
+            "type": "string",
+            "default": "BOTTOM"
+        },
+        "image2MpSizeMode12": {
+            "type": "string",
+            "default": "SCALED"
+        },
+        "image2MpDownscaleFactor12": {
+            "type": "string",
+            "default": "2"
+        },
+        "imageFov12": {
+            "type": "string",
+            "default": "ISP_30FOV"
+        }
+    },
+    "requiredSensors": "./CGFDemo.required-sensors.json",
+    "sensorMappingLookups": [
+        "../roadrunner-2.0/config/sensor_mappings"
+    ],
+    "subcomponents": {
+        "cgfDemo": {
+            "componentType": "./graphlets/CGFDemo.graphlet.json",
+            "parameters": {}
+        }
+    },
+    "connections": [],
+    "states": {
+        "STANDARD": {
+            "stmScheduleKey": "standardSchedule",
+            "default": true
+        },
+        "SLOW": {
+            "stmScheduleKey": "slowSchedule"
+        }
+    },
+    "stmSchedules": {
+        "standardSchedule": {
+            "wcet": "./CGFDemo_wcet.yaml",
+            "hyperepochs": {
+                "cameraHyperepoch": {
+                    "period": 33000000,
+                    "epochs": {
+                        "renderEpoch": {
+                            "period": 33000000,
+                            "frames": 1,
+                            "passes": [
+                                [
+                                    "cgfDemo.arender"
+                                ]
+                            ]
+                        },
+                        "cameraEpoch": {
+                            "period": 33000000,
+                            "frames": 1,
+                            "passes": [
+                                [
+                                    "EpochSyncService.camera_master.SYNC",
+                                    "cgfDemo.cameraEpochSync",
+                                    "cgfDemo.cameraPipeline2",
+                                    "cgfDemo.cameraPipeline3",
+                                    "cgfDemo.cameraPipeline4",
+                                    "cgfDemo.cameraPipelineFront0",
+                                    "cgfDemo.fisheyeCameraPipeline0",
+                                    "cgfDemo.fisheyeCameraPipeline1",
+                                    "cgfDemo.fisheyeCameraPipeline2",
+                                    "cgfDemo.fisheyeCameraPipeline3",
+                                    "cgfDemo.selfCalibration"
+                                ]
+                            ]
+                        },
+                        "radarDopplerMotionEpoch": {
+                            "period": 33000000,
+                            "frames": 1,
+                            "passes": [
+                                [
+                                    "cgfDemo.radarDopplerMotion"
+                                ]
+                            ]
+                        }
+                    },
+                    "resources": {
+                        "machine0.CPU0": [],
+                        "machine0.CPU1": [],
+                        "machine0.CPU2": [],
+                        "machine0.CPU3": [],
+                        "machine0.dGPU": [],
+                        "camera_master.CUDA_STREAM0:dGPU": [],
+                        "camera_master.CUDA_MUTEX_LOCK": [],
+                        "camera_pipeline0.CUDA_STREAM0:dGPU": [],
+                        "camera_pipeline0.CUDA_MUTEX_LOCK": [
+                            "cgfDemo.arender.renderingNode",
+                            "cgfDemo.cameraPipelineFront0.cameraSensor.cameraNode.PROCESSED_OUTPUT_CPU_SYNC",
+                            "cgfDemo.cameraPipelineFront0.cameraSensor.cameraNode.RAW_OUTPUT_CPU_SYNC"
+                        ],
+                        "camera_pipeline2.CUDA_STREAM0:dGPU": [],
+                        "camera_pipeline2.CUDA_MUTEX_LOCK": [
+                            "cgfDemo.cameraPipeline2.cameraSensor.cameraNode.PROCESSED_OUTPUT_CPU_SYNC",
+                            "cgfDemo.cameraPipeline2.cameraSensor.cameraNode.RAW_OUTPUT_CPU_SYNC"
+                        ],
+                        "camera_pipeline3.CUDA_STREAM0:dGPU": [],
+                        "camera_pipeline3.CUDA_MUTEX_LOCK": [
+                            "cgfDemo.cameraPipeline3.cameraSensor.cameraNode.PROCESSED_OUTPUT_CPU_SYNC",
+                            "cgfDemo.cameraPipeline3.cameraSensor.cameraNode.RAW_OUTPUT_CPU_SYNC"
+                        ],
+                        "camera_pipeline4.CUDA_STREAM0:dGPU": [],
+                        "camera_pipeline4.CUDA_MUTEX_LOCK": [
+                            "cgfDemo.cameraPipeline4.cameraSensor.cameraNode.PROCESSED_OUTPUT_CPU_SYNC",
+                            "cgfDemo.cameraPipeline4.cameraSensor.cameraNode.RAW_OUTPUT_CPU_SYNC"
+                        ],
+                        "camera_pipeline5.CUDA_STREAM0:dGPU": [],
+                        "camera_pipeline5.CUDA_MUTEX_LOCK": [
+                            "cgfDemo.fisheyeCameraPipeline0.cameraSensor.cameraNode.PROCESSED_OUTPUT_CPU_SYNC",
+                            "cgfDemo.fisheyeCameraPipeline0.cameraSensor.cameraNode.RAW_OUTPUT_CPU_SYNC"
+                        ],
+                        "camera_pipeline6.CUDA_STREAM0:dGPU": [],
+                        "camera_pipeline6.CUDA_MUTEX_LOCK": [
+                            "cgfDemo.fisheyeCameraPipeline1.cameraSensor.cameraNode.PROCESSED_OUTPUT_CPU_SYNC",
+                            "cgfDemo.fisheyeCameraPipeline1.cameraSensor.cameraNode.RAW_OUTPUT_CPU_SYNC"
+                        ],
+                        "camera_pipeline7.CUDA_STREAM0:dGPU": [],
+                        "camera_pipeline7.CUDA_MUTEX_LOCK": [
+                            "cgfDemo.fisheyeCameraPipeline2.cameraSensor.cameraNode.PROCESSED_OUTPUT_CPU_SYNC",
+                            "cgfDemo.fisheyeCameraPipeline2.cameraSensor.cameraNode.RAW_OUTPUT_CPU_SYNC"
+                        ],
+                        "camera_pipeline8.CUDA_STREAM0:dGPU": [],
+                        "camera_pipeline8.CUDA_MUTEX_LOCK": [
+                            "cgfDemo.fisheyeCameraPipeline3.cameraSensor.cameraNode.PROCESSED_OUTPUT_CPU_SYNC",
+                            "cgfDemo.fisheyeCameraPipeline3.cameraSensor.cameraNode.RAW_OUTPUT_CPU_SYNC"
+                        ]
+                    }
+                },
+                "imuHyperepoch": {
+                    "epochs": {
+                        "imuEpoch": {
+                            "period": 10000000,
+                            "passes": [
+                                [
+                                    "cgfDemo.egomotion",
+                                    "cgfDemo.imuCanEpochSync",
+                                    "cgfDemo.imuSensor",
+                                    "cgfDemo.vehicleStateConsumer"
+                                ]
+                            ]
+                        }
+                    },
+                    "resources": {
+                        "machine0.CPU4": []
+                    }
+                },
+                "radarHyperepoch": {
+                    "epochs": {
+                        "radarEpoch": {
+                            "period": 5000000,
+                            "passes": [
+                                [
+                                    "cgfDemo.radarEpochSync",
+                                    "cgfDemo.radarSensor0",
+                                    "cgfDemo.radarSensor1",
+                                    "cgfDemo.radarSensor2",
+                                    "cgfDemo.radarSensor3",
+                                    "cgfDemo.radarSensor4"
+                                ]
+                            ]
+                        }
+                    },
+                    "resources": {
+                        "machine0.CPU5": []
+                    }
+                }
+            }
+        },
+        "slowSchedule": {
+            "wcet": "./CGFDemo_wcet.yaml",
+            "hyperepochs": {
+                "cameraHyperepoch": {
+                    "period": 330000000,
+                    "epochs": {
+                        "renderEpoch": {
+                            "period": 330000000,
+                            "frames": 1,
+                            "passes": [
+                                [
+                                    "cgfDemo.arender"
+                                ]
+                            ]
+                        },
+                        "cameraEpoch": {
+                            "period": 330000000,
+                            "frames": 1,
+                            "passes": [
+                                [
+                                    "EpochSyncService.camera_master.SYNC",
+                                    "cgfDemo.cameraEpochSync",
+                                    "cgfDemo.cameraPipeline2",
+                                    "cgfDemo.cameraPipeline3",
+                                    "cgfDemo.cameraPipeline4",
+                                    "cgfDemo.cameraPipelineFront0",
+                                    "cgfDemo.fisheyeCameraPipeline0",
+                                    "cgfDemo.fisheyeCameraPipeline1",
+                                    "cgfDemo.fisheyeCameraPipeline2",
+                                    "cgfDemo.fisheyeCameraPipeline3",
+                                    "cgfDemo.selfCalibration"
+                                ]
+                            ]
+                        },
+                        "radarDopplerMotionEpoch": {
+                            "period": 330000000,
+                            "frames": 1,
+                            "passes": [
+                                [
+                                    "cgfDemo.radarDopplerMotion"
+                                ]
+                            ]
+                        }
+                    },
+                    "resources": {
+                        "machine0.CPU0": [],
+                        "machine0.CPU1": [],
+                        "machine0.CPU2": [],
+                        "machine0.CPU3": [],
+                        "machine0.dGPU": [],
+                        "camera_master.CUDA_STREAM0:dGPU": [],
+                        "camera_master.CUDA_MUTEX_LOCK": [],
+                        "camera_pipeline0.CUDA_STREAM0:dGPU": [],
+                        "camera_pipeline0.CUDA_MUTEX_LOCK": [
+                            "cgfDemo.arender.renderingNode",
+                            "cgfDemo.cameraPipelineFront0.cameraSensor.cameraNode.PROCESSED_OUTPUT_CPU_SYNC",
+                            "cgfDemo.cameraPipelineFront0.cameraSensor.cameraNode.RAW_OUTPUT_CPU_SYNC"
+                        ],
+                        "camera_pipeline2.CUDA_STREAM0:dGPU": [],
+                        "camera_pipeline2.CUDA_MUTEX_LOCK": [
+                            "cgfDemo.cameraPipeline2.cameraSensor.cameraNode.PROCESSED_OUTPUT_CPU_SYNC",
+                            "cgfDemo.cameraPipeline2.cameraSensor.cameraNode.RAW_OUTPUT_CPU_SYNC"
+                        ],
+                        "camera_pipeline3.CUDA_STREAM0:dGPU": [],
+                        "camera_pipeline3.CUDA_MUTEX_LOCK": [
+                            "cgfDemo.cameraPipeline3.cameraSensor.cameraNode.PROCESSED_OUTPUT_CPU_SYNC",
+                            "cgfDemo.cameraPipeline3.cameraSensor.cameraNode.RAW_OUTPUT_CPU_SYNC"
+                        ],
+                        "camera_pipeline4.CUDA_STREAM0:dGPU": [],
+                        "camera_pipeline4.CUDA_MUTEX_LOCK": [
+                            "cgfDemo.cameraPipeline4.cameraSensor.cameraNode.PROCESSED_OUTPUT_CPU_SYNC",
+                            "cgfDemo.cameraPipeline4.cameraSensor.cameraNode.RAW_OUTPUT_CPU_SYNC"
+                        ],
+                        "camera_pipeline5.CUDA_STREAM0:dGPU": [],
+                        "camera_pipeline5.CUDA_MUTEX_LOCK": [
+                            "cgfDemo.fisheyeCameraPipeline0.cameraSensor.cameraNode.PROCESSED_OUTPUT_CPU_SYNC",
+                            "cgfDemo.fisheyeCameraPipeline0.cameraSensor.cameraNode.RAW_OUTPUT_CPU_SYNC"
+                        ],
+                        "camera_pipeline6.CUDA_STREAM0:dGPU": [],
+                        "camera_pipeline6.CUDA_MUTEX_LOCK": [
+                            "cgfDemo.fisheyeCameraPipeline1.cameraSensor.cameraNode.PROCESSED_OUTPUT_CPU_SYNC",
+                            "cgfDemo.fisheyeCameraPipeline1.cameraSensor.cameraNode.RAW_OUTPUT_CPU_SYNC"
+                        ],
+                        "camera_pipeline7.CUDA_STREAM0:dGPU": [],
+                        "camera_pipeline7.CUDA_MUTEX_LOCK": [
+                            "cgfDemo.fisheyeCameraPipeline2.cameraSensor.cameraNode.PROCESSED_OUTPUT_CPU_SYNC",
+                            "cgfDemo.fisheyeCameraPipeline2.cameraSensor.cameraNode.RAW_OUTPUT_CPU_SYNC"
+                        ],
+                        "camera_pipeline8.CUDA_STREAM0:dGPU": [],
+                        "camera_pipeline8.CUDA_MUTEX_LOCK": [
+                            "cgfDemo.fisheyeCameraPipeline3.cameraSensor.cameraNode.PROCESSED_OUTPUT_CPU_SYNC",
+                            "cgfDemo.fisheyeCameraPipeline3.cameraSensor.cameraNode.RAW_OUTPUT_CPU_SYNC"
+                        ]
+                    }
+                },
+                "imuHyperepoch": {
+                    "epochs": {
+                        "imuEpoch": {
+                            "period": 100000000,
+                            "passes": [
+                                [
+                                    "cgfDemo.egomotion",
+                                    "cgfDemo.imuCanEpochSync",
+                                    "cgfDemo.imuSensor",
+                                    "cgfDemo.vehicleStateConsumer"
+                                ]
+                            ]
+                        }
+                    },
+                    "resources": {
+                        "machine0.CPU4": []
+                    }
+                },
+                "radarHyperepoch": {
+                    "epochs": {
+                        "radarEpoch": {
+                            "period": 50000000,
+                            "passes": [
+                                [
+                                    "cgfDemo.radarEpochSync",
+                                    "cgfDemo.radarSensor0",
+                                    "cgfDemo.radarSensor1",
+                                    "cgfDemo.radarSensor2",
+                                    "cgfDemo.radarSensor3",
+                                    "cgfDemo.radarSensor4"
+                                ]
+                            ]
+                        }
+                    },
+                    "resources": {
+                        "machine0.CPU5": []
+                    }
+                }
+            }
+        }
+    },
+    "processes": {
+        "ssm": {
+            "runOn": "machine0",
+            "executable": "SSM/vanillassm"
+        },
+        "schedule_manager": {
+            "runOn": "machine0",
+            "executable": "ScheduleManager",
+            "argv": {
+                "--enableScheduleSwitching": "true",
+                "--scheduleManagerHostIP": "127.0.0.1",
+                "--scheduleManagerHostPort": "4010",
+                "--scheduleManagerNumClients": "5"
+            }
+        },
+        "sensor_sync_server": {
+            "runOn": "machine0",
+            "executable": "sensor_sync_server",
+            "argv": {
+                "--syncServerHostPort": "40001",
+                "--cameraGroup": "0",
+                "--radarGroup": "0",
+                "--imuGpsCanGroup": "0"
+            }
+        },
+        "stm_master": {
+            "runOn": "machine0",
+            "executable": "stm_master",
+            "argv": {
+                "--timeout-us": "80000000",
+                "--soc": "TegraA",
+                "-m": true
+            }
+        },
+        "camera_pipeline0": {
+            "runOn": "machine0",
+            "executable": "LoaderLite",
+            "subcomponents": [
+                "cgfDemo.cameraPipelineFront0",
+                "cgfDemo.arender"
+            ],
+            "argv": {
+                "--nodeInitThreadPoolSize": "7",
+                "--channelBindingThreadPoolSize": "7"
+            }
+        },
+        "camera_pipeline2": {
+            "runOn": "machine0",
+            "executable": "LoaderLite",
+            "subcomponents": [
+                "cgfDemo.cameraPipeline2"
+            ]
+        },
+        "camera_pipeline3": {
+            "runOn": "machine0",
+            "executable": "LoaderLite",
+            "subcomponents": [
+                "cgfDemo.cameraPipeline3"
+            ]
+        },
+        "camera_pipeline4": {
+            "runOn": "machine0",
+            "executable": "LoaderLite",
+            "subcomponents": [
+                "cgfDemo.cameraPipeline4",
+                "cgfDemo.fisheyeCameraPipeline0",
+                "cgfDemo.fisheyeCameraPipeline1",
+                "cgfDemo.fisheyeCameraPipeline2",
+                "cgfDemo.fisheyeCameraPipeline3"
+            ]
+        },
+        "camera_master": {
+            "runOn": "machine0",
+            "executable": "LoaderLite",
+            "services": {
+                "EpochSyncService": {
+                    "parameters": {},
+                    "passes": [
+                        "SYNC"
+                    ]
+                }
+            },
+            "subcomponents": [
+                "cgfDemo.selfCalibration",
+                "cgfDemo.radarSensor0",
+                "cgfDemo.radarSensor1",
+                "cgfDemo.radarSensor2",
+                "cgfDemo.radarSensor3",
+                "cgfDemo.radarSensor4",
+                "cgfDemo.radarDopplerMotion",
+                "cgfDemo.imuSensor",
+                "cgfDemo.vehicleStateConsumer",
+                "cgfDemo.egomotion",
+                "cgfDemo.cameraEpochSync",
+                "cgfDemo.radarEpochSync",
+                "cgfDemo.imuCanEpochSync"
+            ]
+        },
+        "cgf_sync_ctrl_client": {
+            "executable": "CGFSyncControlClientLite",
+            "runOn": "machine0",
+            "argv": {
+                "--port": "4002"
+            }
+        },
+        "cgf_sync_server": {
+            "executable": "CGFSyncServer",
+            "runOn": "machine0",
+            "argv": {
+                "--port": "4002",
+                "--participant": "7"
+            }
+        }
+    },
+    "extraInfo": "./CGFDemoExtraInfo.json"
+}

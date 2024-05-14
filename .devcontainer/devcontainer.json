@@ -1,0 +1,35 @@
+{
+	"name": "DriveOS SDK",
+	"image": "nvcr.io/drive/driveos-sdk/drive-agx-orin-linux-aarch64-sdk-build-x86:latest",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.cmake-tools",
+				"ms-vscode.cpptools",
+				"ms-vscode.cpptools-extension-pack",
+				"ms-vscode.cpptools-themes",
+				"twxs.cmake"
+			]
+		}
+	},
+	"mounts": [
+		"source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind",
+		"source=/dev/bus/usb,target=/dev/bus/usb,type=bind",
+		"source=${localWorkspaceFolder}/drive_flashing,target=/drive_flashing,type=bind",
+	],
+	"containerEnv": {
+		"DISPLAY": "${localEnv:DISPLAY}",
+		"NVIDIA_DRIVER_CAPABILITIES": "all"
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/git:1": {}
+	},
+	"runArgs": [
+		"--privileged",
+		"--net=host",
+		"--gpus=all",
+		"--sysctl", "fs.mqueue.msg_max=4096",
+		"--sysctl", "fs.mqueue.queues_max=512",
+		"--ulimit", "msgqueue=2097152"
+	]
+}

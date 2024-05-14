@@ -1,0 +1,43 @@
+{
+    "camera:front:center:120fov": {
+        "typeIndex": 0,
+        "connectedTo": [
+            "machine0"
+        ]
+    },
+    "camera:front:center:60fov": {
+        "typeIndex": 1,
+        "connectedTo": [
+            "machine0"
+        ]
+    },
+    "camera:rear:right:120fov": {
+        "typeIndex": 2,
+        "connectedTo": [
+            "machine0"
+        ]
+    },
+    "camera:rear:left:120fov": {
+        "typeIndex": 3,
+        "connectedTo": [
+            "machine0"
+        ]
+    },
+    "radar:rear:left:center": {
+        "typeIndex": 0,
+        "connectedTo": [
+            "machine0"
+        ]
+    },
+    "radar:rear:right:center": {
+        "typeIndex": 1,
+        "connectedTo": [
+            "machine0"
+        ]
+    },
+    "imu:xsens": {
+        "connectedTo": [
+            "machine0"
+        ]
+    }
+}

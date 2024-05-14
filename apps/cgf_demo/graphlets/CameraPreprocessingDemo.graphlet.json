@@ -1,0 +1,123 @@
+{
+    "name": "CameraPreprocessingDemo",
+    "inputPorts": {
+        "IMAGE": {
+            "type": "dwImageHandle_t"
+        }
+    },
+    "outputPorts": {
+        "FEATURE_HISTORY_CPU": {
+            "type": "dwFeatureHistoryArray"
+        },
+        "FEATURE_HISTORY_GPU": {
+            "type": "dwFeatureHistoryArray"
+        },
+        "PYRAMID": {
+            "type": "dwPyramidImage"
+        }
+    },
+    "parameters": {
+        "cameraIndex": {
+            "type": "size_t",
+            "default": 0
+        },
+        "initForCamera": {
+            "type": "bool",
+            "default": true
+        },
+        "streamIndex": {
+            "type": "size_t",
+            "default": 0
+        },
+        "pyramidLevelCount": {
+            "type": "uint32_t",
+            "default": 5
+        },
+        "maxFeatureCount": {
+            "type": "uint32_t",
+            "default": 4000
+        },
+        "featureDetectorType": {
+            "type": "dwFeature2DDetectorType",
+            "default": "DW_FEATURE2D_DETECTOR_TYPE_EX"
+        },
+        "featureTrackerAlgorithm": {
+            "type": "dwFeature2DTrackerAlgorithm",
+            "default": "DW_FEATURE2D_TRACKER_ALGORITHM_EX_FAST"
+        }
+    },
+    "subcomponents": {
+        "featureDetectorNode": {
+            "componentType": "../../../src/dwframework/dwnodes/imageprocessing/dwfeaturedetectornode/dwFeatureDetectorNode.node.json",
+            "parameters": {
+                "*": "$*"
+            }
+        },
+        "featureTrackerNode": {
+            "componentType": "../../../src/dwframework/dwnodes/imageprocessing/dwfeaturetrackernode/dwFeatureTrackerNode.node.json",
+            "parameters": {
+                "*": "$*"
+            }
+        },
+        "pyramidNode": {
+            "componentType": "../../../src/dwframework/dwnodes/imageprocessing/dwpyramidnode/dwPyramidNode.node.json",
+            "parameters": {
+                "*": "$*"
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": "IMAGE",
+            "dests": {
+                "pyramidNode.IMAGE": {}
+            }
+        },
+        {
+            "src": "featureDetectorNode.FEATURE_ARRAY_GPU",
+            "dests": {
+                "featureTrackerNode.DETECTED_FEATURES": {}
+            },
+            "params": {
+                "indirect": true
+            }
+        },
+        {
+            "src": "featureTrackerNode.FEATURE_HISTORY_CPU",
+            "dests": {
+                "FEATURE_HISTORY_CPU": {}
+            }
+        },
+        {
+            "src": "featureTrackerNode.FEATURE_HISTORY_GPU",
+            "dests": {
+                "FEATURE_HISTORY_GPU": {}
+            }
+        },
+        {
+            "src": "featureTrackerNode.FEATURE_HISTORY_GPU_INTERNAL",
+            "dests": {
+                "featureDetectorNode.PREDICTED_FEATURE": {}
+            }
+        },
+        {
+            "src": "featureTrackerNode.NCC_SCORES",
+            "dests": {
+                "featureDetectorNode.NCC_SCORES": {}
+            },
+            "params": {
+                "singleton": true
+            }
+        },
+        {
+            "src": "pyramidNode.LEVEL_IMAGES",
+            "dests": {
+                "PYRAMID": {},
+                "featureDetectorNode.PYRAMID": {},
+                "featureTrackerNode.CURRENT_PYRAMID": {
+                    "fifo-size": 2
+                }
+            }
+        }
+    ]
+}

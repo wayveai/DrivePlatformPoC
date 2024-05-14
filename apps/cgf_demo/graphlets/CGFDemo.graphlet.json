@@ -1,0 +1,1051 @@
+{
+    "name": "CGFDemo",
+    "inputPorts": {},
+    "outputPorts": {
+        "IMAGE": {
+            "type": "dwImageHandle_t",
+            "array": 9
+        },
+        "IMAGE_TIMESTAMP": {
+            "type": "dwTime_t",
+            "array": 9
+        }
+    },
+    "parameters": {
+        "masterCameraIndex": {
+            "type": "size_t",
+            "default": 0
+        },
+        "calibrateVehicle": {
+            "type": "bool",
+            "default": false
+        }
+    },
+    "subcomponents": {
+        "arender": {
+            "componentType": "RenderDemo.graphlet.json",
+            "parameters": {
+                "masterCameraIndex": "$masterCameraIndex"
+            }
+        },
+        "cameraEpochSync": {
+            "componentType": "SensorSync.graphlet.json",
+            "parameters": {
+                "epochId": 2
+            }
+        },
+        "cameraPipeline2": {
+            "componentType": "CameraPipeline.graphlet.json",
+            "parameters": {
+                "cameraIndex": 2
+            }
+        },
+        "cameraPipeline3": {
+            "componentType": "CameraPipeline.graphlet.json",
+            "parameters": {
+                "cameraIndex": 3
+            }
+        },
+        "cameraPipeline4": {
+            "componentType": "CameraPipeline.graphlet.json",
+            "parameters": {
+                "cameraIndex": 4
+            }
+        },
+        "cameraPipelineFront0": {
+            "componentType": "../CameraPipelineFront.graphlet.json",
+            "parameters": {
+                "cameraIndex_1": 0,
+                "cameraIndex_2": 1
+            }
+        },
+        "egomotion": {
+            "componentType": "EgomotionDemo.graphlet.json"
+        },
+        "fisheyeCameraPipeline0": {
+            "componentType": "CameraPipeline.graphlet.json",
+            "parameters": {
+                "cameraIndex": 5
+            }
+        },
+        "fisheyeCameraPipeline1": {
+            "componentType": "CameraPipeline.graphlet.json",
+            "parameters": {
+                "cameraIndex": 6
+            }
+        },
+        "fisheyeCameraPipeline2": {
+            "componentType": "CameraPipeline.graphlet.json",
+            "parameters": {
+                "cameraIndex": 7
+            }
+        },
+        "fisheyeCameraPipeline3": {
+            "componentType": "CameraPipeline.graphlet.json",
+            "parameters": {
+                "cameraIndex": 8
+            }
+        },
+        "imuCanEpochSync": {
+            "componentType": "SensorSync.graphlet.json",
+            "parameters": {
+                "epochId": 0
+            }
+        },
+        "imuSensor": {
+            "componentType": "ImuSensor.graphlet.json"
+        },
+        "radarDopplerMotion": {
+            "componentType": "RadarDopplerMotion.graphlet.json"
+        },
+        "radarEpochSync": {
+            "componentType": "SensorSync.graphlet.json",
+            "parameters": {
+                "epochId": 3
+            }
+        },
+        "radarSensor0": {
+            "componentType": "RadarSensor.graphlet.json",
+            "parameters": {
+                "sensorAffinityMask": 1,
+                "sensorId": 0,
+                "sensorThreadPriority": 99
+            }
+        },
+        "radarSensor1": {
+            "componentType": "RadarSensor.graphlet.json",
+            "parameters": {
+                "sensorAffinityMask": 1,
+                "sensorId": 1,
+                "sensorThreadPriority": 99
+            }
+        },
+        "radarSensor2": {
+            "componentType": "RadarSensor.graphlet.json",
+            "parameters": {
+                "sensorAffinityMask": 1,
+                "sensorId": 2,
+                "sensorThreadPriority": 99
+            }
+        },
+        "radarSensor3": {
+            "componentType": "RadarSensor.graphlet.json",
+            "parameters": {
+                "sensorAffinityMask": 1,
+                "sensorId": 3,
+                "sensorThreadPriority": 99
+            }
+        },
+        "radarSensor4": {
+            "componentType": "RadarSensor.graphlet.json",
+            "parameters": {
+                "sensorAffinityMask": 1,
+                "sensorId": 4,
+                "sensorThreadPriority": 99
+            }
+        },
+        "selfCalibration": {
+            "componentType": "SelfCalibrationDemo.graphlet.json",
+            "parameters": {
+                "calibrateIMU": true,
+                "calibrateVehicle": "$calibrateVehicle",
+                "cameraCalibrationMethod": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "cameraCalibrationSignals": [
+                    7,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                ],
+                "cameraEnabledMask": [
+                    true,
+                    false,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true
+                ],
+                "cameraSensorIndices": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8
+                ],
+                "cameraSensorStreamIndices": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "channelFifoSize": 40,
+                "enforceDependencies": false,
+                "lidarEnabledMask": [
+                    true,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false
+                ],
+                "lidarSensorIndices": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                ],
+                "lidarSensorStreamIndices": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "radarEnabledMask": [
+                    true,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true
+                ],
+                "radarSensorIndices": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8
+                ],
+                "radarSensorStreamIndices": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "radarSensorWheelCalibration": 0
+            }
+        },
+        "vehicleStateConsumer": {
+            "componentType": "VehicleStateConsumer.graphlet.json"
+        }
+    },
+    "connections": [
+        {
+            "src": "cameraEpochSync.SYNC_TIMESTAMP[0]",
+            "dests": {
+                "cameraPipelineFront0.VIRTUAL_SYNC_TIME": {}
+            }
+        },
+        {
+            "src": "cameraEpochSync.SYNC_TIMESTAMP[2]",
+            "dests": {
+                "cameraPipeline2.VIRTUAL_SYNC_TIME": {}
+            }
+        },
+        {
+            "src": "cameraEpochSync.SYNC_TIMESTAMP[3]",
+            "dests": {
+                "cameraPipeline3.VIRTUAL_SYNC_TIME": {}
+            }
+        },
+        {
+            "src": "cameraEpochSync.SYNC_TIMESTAMP[4]",
+            "dests": {
+                "cameraPipeline4.VIRTUAL_SYNC_TIME": {}
+            }
+        },
+        {
+            "src": "cameraEpochSync.SYNC_TIMESTAMP[5]",
+            "dests": {
+                "fisheyeCameraPipeline0.VIRTUAL_SYNC_TIME": {}
+            }
+        },
+        {
+            "src": "cameraEpochSync.SYNC_TIMESTAMP[6]",
+            "dests": {
+                "fisheyeCameraPipeline1.VIRTUAL_SYNC_TIME": {}
+            }
+        },
+        {
+            "src": "cameraEpochSync.SYNC_TIMESTAMP[7]",
+            "dests": {
+                "fisheyeCameraPipeline2.VIRTUAL_SYNC_TIME": {}
+            }
+        },
+        {
+            "src": "cameraEpochSync.SYNC_TIMESTAMP[8]",
+            "dests": {
+                "fisheyeCameraPipeline3.VIRTUAL_SYNC_TIME": {}
+            }
+        },
+        {
+            "src": "cameraPipeline2.CAMERA_INTRINSICS",
+            "dests": {
+                "selfCalibration.CAMERA_INTRINSICS[2]": {}
+            }
+        },
+        {
+            "src": "cameraPipeline2.CUDA_ISP_YUV_UINT_8_HALF_RES",
+            "dests": {
+                "IMAGE[2]": {}
+            }
+        },
+        {
+            "src": "cameraPipeline2.FEATURE_HISTORY_GPU",
+            "dests": {
+                "selfCalibration.CAMERA_FEATURE_DETECTION[2]": {}
+            }
+        },
+        {
+            "src": "cameraPipeline2.IMAGE_TIMESTAMP",
+            "dests": {
+                "IMAGE_TIMESTAMP[2]": {},
+                "selfCalibration.CAMERA_TIMESTAMP[2]": {}
+            }
+        },
+        {
+            "src": "cameraPipeline2.NEXT_IMAGE_TIMESTAMP",
+            "dests": {
+                "cameraEpochSync.SENSOR_TIMESTAMP[2]": {}
+            },
+            "params": {
+                "indirect": true
+            }
+        },
+        {
+            "src": "cameraPipeline3.CAMERA_INTRINSICS",
+            "dests": {
+                "selfCalibration.CAMERA_INTRINSICS[3]": {}
+            }
+        },
+        {
+            "src": "cameraPipeline3.CUDA_ISP_YUV_UINT_8_HALF_RES",
+            "dests": {
+                "IMAGE[3]": {}
+            }
+        },
+        {
+            "src": "cameraPipeline3.FEATURE_HISTORY_GPU",
+            "dests": {
+                "selfCalibration.CAMERA_FEATURE_DETECTION[3]": {}
+            }
+        },
+        {
+            "src": "cameraPipeline3.IMAGE_TIMESTAMP",
+            "dests": {
+                "IMAGE_TIMESTAMP[3]": {},
+                "selfCalibration.CAMERA_TIMESTAMP[3]": {}
+            }
+        },
+        {
+            "src": "cameraPipeline3.NEXT_IMAGE_TIMESTAMP",
+            "dests": {
+                "cameraEpochSync.SENSOR_TIMESTAMP[3]": {}
+            },
+            "params": {
+                "indirect": true
+            }
+        },
+        {
+            "src": "cameraPipeline4.CAMERA_INTRINSICS",
+            "dests": {
+                "selfCalibration.CAMERA_INTRINSICS[4]": {}
+            }
+        },
+        {
+            "src": "cameraPipeline4.CUDA_ISP_YUV_UINT_8_HALF_RES",
+            "dests": {
+                "IMAGE[4]": {}
+            }
+        },
+        {
+            "src": "cameraPipeline4.FEATURE_HISTORY_GPU",
+            "dests": {
+                "selfCalibration.CAMERA_FEATURE_DETECTION[4]": {}
+            }
+        },
+        {
+            "src": "cameraPipeline4.IMAGE_TIMESTAMP",
+            "dests": {
+                "IMAGE_TIMESTAMP[4]": {},
+                "selfCalibration.CAMERA_TIMESTAMP[4]": {}
+            }
+        },
+        {
+            "src": "cameraPipeline4.NEXT_IMAGE_TIMESTAMP",
+            "dests": {
+                "cameraEpochSync.SENSOR_TIMESTAMP[4]": {}
+            },
+            "params": {
+                "indirect": true
+            }
+        },
+        {
+            "src": "cameraPipelineFront0.CAMERA_INTRINSICS",
+            "dests": {
+                "selfCalibration.CAMERA_INTRINSICS[0]": {},
+                "selfCalibration.CAMERA_INTRINSICS[1]": {}
+            }
+        },
+        {
+            "src": "cameraPipelineFront0.CUDA_ISP_YUV_UINT_8_HALF_RES[0]",
+            "dests": {
+                "IMAGE[0]": {},
+                "arender.IMAGE[0]": {
+                    "mailbox": true,
+                    "reuse": true
+                }
+            }
+        },
+        {
+            "src": "cameraPipelineFront0.CUDA_ISP_YUV_UINT_8_HALF_RES[1]",
+            "dests": {
+                "IMAGE[1]": {}
+            }
+        },
+        {
+            "src": "cameraPipelineFront0.FEATURE_HISTORY_CPU[0]",
+            "dests": {
+                "arender.FEATURE[0]": {}
+            },
+            "params": {
+                "mailbox": true,
+                "reuse": true
+            }
+        },
+        {
+            "src": "cameraPipelineFront0.FEATURE_HISTORY_GPU[0]",
+            "dests": {
+                "selfCalibration.CAMERA_FEATURE_DETECTION[0]": {}
+            }
+        },
+        {
+            "src": "cameraPipelineFront0.FEATURE_HISTORY_GPU[1]",
+            "dests": {
+                "selfCalibration.CAMERA_FEATURE_DETECTION[1]": {}
+            }
+        },
+        {
+            "src": "cameraPipelineFront0.IMAGE_TIMESTAMP",
+            "dests": {
+                "IMAGE_TIMESTAMP[0]": {},
+                "selfCalibration.CAMERA_TIMESTAMP[0]": {},
+                "selfCalibration.CAMERA_TIMESTAMP[1]": {}
+            }
+        },
+        {
+            "src": "cameraPipelineFront0.NEXT_IMAGE_TIMESTAMP",
+            "dests": {
+                "cameraEpochSync.SENSOR_TIMESTAMP[0]": {},
+                "cameraEpochSync.SENSOR_TIMESTAMP[1]": {}
+            },
+            "params": {
+                "indirect": true
+            }
+        },
+        {
+            "src": "egomotion.EGOMOTION_STATE",
+            "dests": {
+                "arender.EGOMOTION_STATE": {},
+                "selfCalibration.EGOMOTION_STATE_ODO_IMU": {}
+            },
+            "params": {
+                "mailbox": true,
+                "reuse": true
+            }
+        },
+        {
+            "src": "fisheyeCameraPipeline0.CAMERA_INTRINSICS",
+            "dests": {
+                "selfCalibration.CAMERA_INTRINSICS[5]": {}
+            }
+        },
+        {
+            "src": "fisheyeCameraPipeline0.CUDA_ISP_YUV_UINT_8_HALF_RES",
+            "dests": {
+                "IMAGE[5]": {}
+            }
+        },
+        {
+            "src": "fisheyeCameraPipeline0.FEATURE_HISTORY_GPU",
+            "dests": {
+                "selfCalibration.CAMERA_FEATURE_DETECTION[5]": {}
+            }
+        },
+        {
+            "src": "fisheyeCameraPipeline0.IMAGE_TIMESTAMP",
+            "dests": {
+                "IMAGE_TIMESTAMP[5]": {},
+                "selfCalibration.CAMERA_TIMESTAMP[5]": {}
+            }
+        },
+        {
+            "src": "fisheyeCameraPipeline0.NEXT_IMAGE_TIMESTAMP",
+            "dests": {
+                "cameraEpochSync.SENSOR_TIMESTAMP[5]": {}
+            },
+            "params": {
+                "indirect": true
+            }
+        },
+        {
+            "src": "fisheyeCameraPipeline1.CAMERA_INTRINSICS",
+            "dests": {
+                "selfCalibration.CAMERA_INTRINSICS[6]": {}
+            }
+        },
+        {
+            "src": "fisheyeCameraPipeline1.CUDA_ISP_YUV_UINT_8_HALF_RES",
+            "dests": {
+                "IMAGE[6]": {}
+            }
+        },
+        {
+            "src": "fisheyeCameraPipeline1.FEATURE_HISTORY_GPU",
+            "dests": {
+                "selfCalibration.CAMERA_FEATURE_DETECTION[6]": {}
+            }
+        },
+        {
+            "src": "fisheyeCameraPipeline1.IMAGE_TIMESTAMP",
+            "dests": {
+                "IMAGE_TIMESTAMP[6]": {},
+                "selfCalibration.CAMERA_TIMESTAMP[6]": {}
+            }
+        },
+        {
+            "src": "fisheyeCameraPipeline1.NEXT_IMAGE_TIMESTAMP",
+            "dests": {
+                "cameraEpochSync.SENSOR_TIMESTAMP[6]": {}
+            },
+            "params": {
+                "indirect": true
+            }
+        },
+        {
+            "src": "fisheyeCameraPipeline2.CAMERA_INTRINSICS",
+            "dests": {
+                "selfCalibration.CAMERA_INTRINSICS[7]": {}
+            }
+        },
+        {
+            "src": "fisheyeCameraPipeline2.CUDA_ISP_YUV_UINT_8_HALF_RES",
+            "dests": {
+                "IMAGE[7]": {}
+            }
+        },
+        {
+            "src": "fisheyeCameraPipeline2.FEATURE_HISTORY_GPU",
+            "dests": {
+                "selfCalibration.CAMERA_FEATURE_DETECTION[7]": {}
+            }
+        },
+        {
+            "src": "fisheyeCameraPipeline2.IMAGE_TIMESTAMP",
+            "dests": {
+                "IMAGE_TIMESTAMP[7]": {},
+                "selfCalibration.CAMERA_TIMESTAMP[7]": {}
+            }
+        },
+        {
+            "src": "fisheyeCameraPipeline2.NEXT_IMAGE_TIMESTAMP",
+            "dests": {
+                "cameraEpochSync.SENSOR_TIMESTAMP[7]": {}
+            },
+            "params": {
+                "indirect": true
+            }
+        },
+        {
+            "src": "fisheyeCameraPipeline3.CAMERA_INTRINSICS",
+            "dests": {
+                "selfCalibration.CAMERA_INTRINSICS[8]": {}
+            }
+        },
+        {
+            "src": "fisheyeCameraPipeline3.CUDA_ISP_YUV_UINT_8_HALF_RES",
+            "dests": {
+                "IMAGE[8]": {}
+            }
+        },
+        {
+            "src": "fisheyeCameraPipeline3.FEATURE_HISTORY_GPU",
+            "dests": {
+                "selfCalibration.CAMERA_FEATURE_DETECTION[8]": {}
+            }
+        },
+        {
+            "src": "fisheyeCameraPipeline3.IMAGE_TIMESTAMP",
+            "dests": {
+                "IMAGE_TIMESTAMP[8]": {},
+                "selfCalibration.CAMERA_TIMESTAMP[8]": {}
+            }
+        },
+        {
+            "src": "fisheyeCameraPipeline3.NEXT_IMAGE_TIMESTAMP",
+            "dests": {
+                "cameraEpochSync.SENSOR_TIMESTAMP[8]": {}
+            },
+            "params": {
+                "indirect": true
+            }
+        },
+        {
+            "src": "imuCanEpochSync.SYNC_TIMESTAMP[0]",
+            "dests": {
+                "imuSensor.IMU_VIRTUAL_SYNC_TIME": {},
+                "vehicleStateConsumer.VIRTUAL_SYNC_TIME": {}
+            }
+        },
+        {
+            "src": "imuSensor.IMU_PROCESSED_DATA",
+            "dests": {
+                "egomotion.IMU_FRAME": {},
+                "selfCalibration.IMU_FRAME": {
+                    "fifo-size": 40
+                }
+            }
+        },
+        {
+            "src": "imuSensor.IMU_SENSOR_PROPERTIES",
+            "dests": {
+                "egomotion.IMU_EXTRINSICS": {}
+            }
+        },
+        {
+            "src": "imuSensor.NEXT_IMU_TIMESTAMP",
+            "dests": {
+                "imuCanEpochSync.SENSOR_TIMESTAMP[0]": {}
+            },
+            "params": {
+                "indirect": true
+            }
+        },
+        {
+            "src": "radarDopplerMotion.RADAR_DOPPLER_MOTION[0]",
+            "dests": {
+                "selfCalibration.RADAR_DOPPLER_MOTION[0]": {}
+            },
+            "params": {
+                "fifo-size": 40
+            }
+        },
+        {
+            "src": "radarDopplerMotion.RADAR_DOPPLER_MOTION[1]",
+            "dests": {
+                "selfCalibration.RADAR_DOPPLER_MOTION[1]": {}
+            },
+            "params": {
+                "fifo-size": 40
+            }
+        },
+        {
+            "src": "radarDopplerMotion.RADAR_DOPPLER_MOTION[2]",
+            "dests": {
+                "selfCalibration.RADAR_DOPPLER_MOTION[2]": {}
+            },
+            "params": {
+                "fifo-size": 40
+            }
+        },
+        {
+            "src": "radarDopplerMotion.RADAR_DOPPLER_MOTION[3]",
+            "dests": {
+                "selfCalibration.RADAR_DOPPLER_MOTION[3]": {}
+            },
+            "params": {
+                "fifo-size": 40
+            }
+        },
+        {
+            "src": "radarDopplerMotion.RADAR_DOPPLER_MOTION[4]",
+            "dests": {
+                "selfCalibration.RADAR_DOPPLER_MOTION[4]": {}
+            },
+            "params": {
+                "fifo-size": 40
+            }
+        },
+        {
+            "src": "radarEpochSync.SYNC_TIMESTAMP[0]",
+            "dests": {
+                "radarSensor0.VIRTUAL_SYNC_TIME": {}
+            }
+        },
+        {
+            "src": "radarEpochSync.SYNC_TIMESTAMP[1]",
+            "dests": {
+                "radarSensor1.VIRTUAL_SYNC_TIME": {}
+            }
+        },
+        {
+            "src": "radarEpochSync.SYNC_TIMESTAMP[2]",
+            "dests": {
+                "radarSensor2.VIRTUAL_SYNC_TIME": {}
+            }
+        },
+        {
+            "src": "radarEpochSync.SYNC_TIMESTAMP[3]",
+            "dests": {
+                "radarSensor3.VIRTUAL_SYNC_TIME": {}
+            }
+        },
+        {
+            "src": "radarEpochSync.SYNC_TIMESTAMP[4]",
+            "dests": {
+                "radarSensor4.VIRTUAL_SYNC_TIME": {}
+            }
+        },
+        {
+            "src": "radarSensor0.NEXT_RADAR_TIMESTAMP",
+            "dests": {
+                "radarEpochSync.SENSOR_TIMESTAMP[0]": {}
+            },
+            "params": {
+                "indirect": true
+            }
+        },
+        {
+            "src": "radarSensor0.RADAR_PROCESSED_DATA",
+            "dests": {
+                "arender.RADAR_PROCESSED_DATA": {
+                    "mailbox": true,
+                    "reuse": true
+                },
+                "radarDopplerMotion.RADAR_SCAN[0]": {},
+                "selfCalibration.RADAR_SCAN[0]": {}
+            }
+        },
+        {
+            "src": "radarSensor1.NEXT_RADAR_TIMESTAMP",
+            "dests": {
+                "radarEpochSync.SENSOR_TIMESTAMP[1]": {}
+            },
+            "params": {
+                "indirect": true
+            }
+        },
+        {
+            "src": "radarSensor1.RADAR_PROCESSED_DATA",
+            "dests": {
+                "radarDopplerMotion.RADAR_SCAN[1]": {},
+                "selfCalibration.RADAR_SCAN[1]": {}
+            }
+        },
+        {
+            "src": "radarSensor2.NEXT_RADAR_TIMESTAMP",
+            "dests": {
+                "radarEpochSync.SENSOR_TIMESTAMP[2]": {}
+            },
+            "params": {
+                "indirect": true
+            }
+        },
+        {
+            "src": "radarSensor2.RADAR_PROCESSED_DATA",
+            "dests": {
+                "radarDopplerMotion.RADAR_SCAN[2]": {},
+                "selfCalibration.RADAR_SCAN[2]": {}
+            }
+        },
+        {
+            "src": "radarSensor3.NEXT_RADAR_TIMESTAMP",
+            "dests": {
+                "radarEpochSync.SENSOR_TIMESTAMP[3]": {}
+            },
+            "params": {
+                "indirect": true
+            }
+        },
+        {
+            "src": "radarSensor3.RADAR_PROCESSED_DATA",
+            "dests": {
+                "radarDopplerMotion.RADAR_SCAN[3]": {},
+                "selfCalibration.RADAR_SCAN[3]": {}
+            }
+        },
+        {
+            "src": "radarSensor4.NEXT_RADAR_TIMESTAMP",
+            "dests": {
+                "radarEpochSync.SENSOR_TIMESTAMP[4]": {}
+            },
+            "params": {
+                "indirect": true
+            }
+        },
+        {
+            "src": "radarSensor4.RADAR_PROCESSED_DATA",
+            "dests": {
+                "radarDopplerMotion.RADAR_SCAN[4]": {},
+                "selfCalibration.RADAR_SCAN[4]": {}
+            }
+        },
+        {
+            "src": "selfCalibration.CAMERA_EXTRINSICS[0]",
+            "dests": {
+                "arender.CAMERA_EXTRINSICS[0]": {},
+                "cameraPipelineFront0.SENSOR_EXTRINSICS": {
+                    "indirect": true
+                }
+            }
+        },
+        {
+            "src": "selfCalibration.CAMERA_EXTRINSICS[1]",
+            "dests": {
+                "arender.CAMERA_EXTRINSICS[1]": {}
+            }
+        },
+        {
+            "src": "selfCalibration.CAMERA_EXTRINSICS[2]",
+            "dests": {
+                "arender.CAMERA_EXTRINSICS[2]": {},
+                "cameraPipeline2.SENSOR_EXTRINSICS": {
+                    "indirect": true
+                }
+            }
+        },
+        {
+            "src": "selfCalibration.CAMERA_EXTRINSICS[3]",
+            "dests": {
+                "arender.CAMERA_EXTRINSICS[3]": {},
+                "cameraPipeline3.SENSOR_EXTRINSICS": {
+                    "indirect": true
+                }
+            }
+        },
+        {
+            "src": "selfCalibration.CAMERA_EXTRINSICS[4]",
+            "dests": {
+                "arender.CAMERA_EXTRINSICS[4]": {},
+                "cameraPipeline4.SENSOR_EXTRINSICS": {
+                    "indirect": true
+                }
+            }
+        },
+        {
+            "src": "selfCalibration.CAMERA_EXTRINSICS[5]",
+            "dests": {
+                "arender.CAMERA_EXTRINSICS[5]": {},
+                "fisheyeCameraPipeline0.SENSOR_EXTRINSICS": {
+                    "indirect": true
+                }
+            }
+        },
+        {
+            "src": "selfCalibration.CAMERA_EXTRINSICS[6]",
+            "dests": {
+                "arender.CAMERA_EXTRINSICS[6]": {},
+                "fisheyeCameraPipeline1.SENSOR_EXTRINSICS": {
+                    "indirect": true
+                }
+            }
+        },
+        {
+            "src": "selfCalibration.CAMERA_EXTRINSICS[7]",
+            "dests": {
+                "arender.CAMERA_EXTRINSICS[7]": {},
+                "fisheyeCameraPipeline2.SENSOR_EXTRINSICS": {
+                    "indirect": true
+                }
+            }
+        },
+        {
+            "src": "selfCalibration.CAMERA_EXTRINSICS[8]",
+            "dests": {
+                "arender.CAMERA_EXTRINSICS[8]": {},
+                "fisheyeCameraPipeline3.SENSOR_EXTRINSICS": {
+                    "indirect": true
+                }
+            }
+        },
+        {
+            "src": "selfCalibration.FRONT_STEERING_OFFSET",
+            "dests": {
+                "arender.FRONT_STEERING_OFFSET": {}
+            },
+            "params": {
+                "mailbox": true,
+                "reuse": true
+            }
+        },
+        {
+            "src": "selfCalibration.IMU_EXTRINSICS",
+            "dests": {
+                "arender.IMU_EXTRINSICS": {},
+                "imuSensor.IMU_SENSOR_EXTRINSICS": {
+                    "indirect": true
+                }
+            }
+        },
+        {
+            "src": "selfCalibration.RADAR_EXTRINSICS[0]",
+            "dests": {
+                "arender.RADAR_EXTRINSICS[0]": {
+                    "mailbox": true,
+                    "reuse": true
+                },
+                "radarSensor0.SENSOR_EXTRINSICS": {
+                    "indirect": true
+                }
+            }
+        },
+        {
+            "src": "selfCalibration.RADAR_EXTRINSICS[1]",
+            "dests": {
+                "arender.RADAR_EXTRINSICS[1]": {
+                    "mailbox": true,
+                    "reuse": true
+                },
+                "radarSensor1.SENSOR_EXTRINSICS": {
+                    "indirect": true
+                }
+            }
+        },
+        {
+            "src": "selfCalibration.RADAR_EXTRINSICS[2]",
+            "dests": {
+                "arender.RADAR_EXTRINSICS[2]": {
+                    "mailbox": true,
+                    "reuse": true
+                },
+                "radarSensor2.SENSOR_EXTRINSICS": {
+                    "indirect": true
+                }
+            }
+        },
+        {
+            "src": "selfCalibration.RADAR_EXTRINSICS[3]",
+            "dests": {
+                "arender.RADAR_EXTRINSICS[3]": {
+                    "mailbox": true,
+                    "reuse": true
+                },
+                "radarSensor3.SENSOR_EXTRINSICS": {
+                    "indirect": true
+                }
+            }
+        },
+        {
+            "src": "selfCalibration.RADAR_EXTRINSICS[4]",
+            "dests": {
+                "arender.RADAR_EXTRINSICS[4]": {
+                    "mailbox": true,
+                    "reuse": true
+                },
+                "radarSensor4.SENSOR_EXTRINSICS": {
+                    "indirect": true
+                }
+            }
+        },
+        {
+            "src": "selfCalibration.WHEEL_RADII",
+            "dests": {
+                "arender.WHEEL_RADII": {
+                    "mailbox": true,
+                    "reuse": true
+                },
+                "egomotion.WHEEL_RADII": {
+                    "indirect": true
+                }
+            }
+        },
+        {
+            "src": "vehicleStateConsumer.VEHICLE_IO_ACTUATION_FEEDBACK",
+            "dests": {
+                "egomotion.VEHICLE_IO_ACTUATION_FEEDBACK": {
+                    "fifo-size": 12
+                },
+                "radarDopplerMotion.VEHICLE_IO_ACTUATION_FEEDBACK": {
+                    "mailbox": true
+                },
+                "selfCalibration.VEHICLE_IO_ACTUATION_FEEDBACK": {
+                    "fifo-size": 40
+                }
+            }
+        },
+        {
+            "src": "vehicleStateConsumer.VEHICLE_IO_NON_SAFETY_STATE",
+            "dests": {
+                "egomotion.VEHICLE_IO_NON_SAFETY_STATE": {
+                    "fifo-size": 12
+                },
+                "radarDopplerMotion.VEHICLE_IO_NON_SAFETY_STATE": {
+                    "mailbox": true
+                },
+                "selfCalibration.VEHICLE_IO_NON_SAFETY_STATE": {
+                    "fifo-size": 40
+                }
+            }
+        },
+        {
+            "src": "vehicleStateConsumer.VEHICLE_IO_SAFETY_STATE",
+            "dests": {
+                "egomotion.VEHICLE_IO_SAFETY_STATE": {
+                    "fifo-size": 12
+                },
+                "radarDopplerMotion.VEHICLE_IO_SAFETY_STATE": {
+                    "mailbox": true
+                }
+            }
+        }
+    ]
+}
